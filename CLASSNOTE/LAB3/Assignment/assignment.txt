@@ -1,0 +1,91 @@
+A.	Periodic Logger with File System Module
+Build a simple Node.js script that runs continuously and logs the current timestamp to a file named activity.log every 10 Seconds.
+Requirements
+1.	Use the fs module to write to a file.
+2.	The file name should be: activity.log
+3.	Every 2 minutes:
+o	Get the current system time.
+o	Format it in readable form (e.g., 2025-06-30 14:02:00).
+o	Append this timestamp to the file activity.log with a message like:
+Log entry at 2025-06-30 14:02:00
+4.	Ensure:
+o	If the file doesn't exist, it should be created.
+o	If it exists, it should append to the file (not overwrite).
+
+
+
+
+
+
+
+
+
+B.	Copy a File Using Node.js File System Module
+Write a Node.js script that copies a file named report.pdf from the root directory to a folder named backups located in the same directory as your script.
+1.	Source File: The file to copy is report.pdf and is located in the root directory where the script runs.
+2.	Destination Folder: ./backups/
+3.	If the backups folder does not exist, the script should create it.
+4.	After copying, print a message like:
+File copied successfully to backups/report.pdf
+5.	If an error occurs (like the source file is missing), it should display a clear error message.
+
+ 
+
+
+
+
+
+
+
+
+C.	List All Files in a Directory
+Read the contents of the documents/ folder and print the names of all files inside.
+Write a Node.js script that reads all the files inside a folder named documents/ and prints their names to the console.
+
+Requirements
+1.	The folder name is documents/.
+2.	The folder is located in the same directory as your script.
+3.	The script should:
+o	Check if the folder exists.
+o	List all items inside (files and subfolders).
+o	Filter and print only file names, not directories.
+
+
+
+
+
+
+
+
+
+
+
+D.	Backup System for .txt Files
+Create a Node.js script that:
+•	Scans the folder myNotes/
+•	Finds all .txt files
+•	Copies them into a new folder backupNotes/
+•	Skips non-.txt files
+•	Creates the destination folder if it doesn't exist
+Requirements
+1.	Source folder: myNotes/
+o	Located in the same directory as your script
+o	Contains various file types (e.g., .txt, .pdf, .jpg)
+2.	Destination folder: backupNotes/
+o	Created automatically if it doesn’t exist
+3.	Copy only files that end with .txt
+4.	Print a success message for each file copied
+
+
+
+
+
+
+
+
+
+
+
+
+
+

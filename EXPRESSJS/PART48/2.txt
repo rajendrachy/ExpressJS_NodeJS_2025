@@ -1,0 +1,2 @@
+done in the app.js at  the end
+create a folder viewa for 404 error 

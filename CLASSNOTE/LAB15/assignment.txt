@@ -1,0 +1,30 @@
+You are provided with a products.json file containing an array of product objects. Each product has the following properties:
+•	id 
+•	name 
+•	category 
+•	price 
+Sample Data in products.json
+[
+    { "id": 1, "name": "Smartphone", "category": "electronics", "price": 15000 },
+    { "id": 2, "name": "Laptop", "category": "electronics", "price": 55000 },
+    { "id": 3, "name": "T-Shirt", "category": "clothing", "price": 700 },
+    { "id": 4, "name": "Jeans", "category": "clothing", "price": 1200 },
+    { "id": 5, "name": "Microwave", "category": "appliances", "price": 9000 },
+    { "id": 6, "name": "Headphones", "category": "electronics", "price": 2000 },
+    { "id": 7, "name": "Jacket", "category": "clothing", "price": 3000 },
+    { "id": 8, "name": "Refrigerator", "category": "appliances", "price": 25000 }
+]
+Task
+Write an Express.js API route to:
+1.	Filter and return products from the JSON file based on the categoryName, which will be passed as a dynamic route parameter.
+2.	Optionally filter the results further by a maxPrice value provided as a query parameter, so that only products with a price less than or equal to the maxPrice are returned.
+Route Definition
+GET /products/category/:categoryName
+•	If the user makes a request like:
+•	GET /products/category/electronics
+It should return all products in the electronics category.
+•	If the user makes a request like:
+•	GET /products/category/clothing?maxPrice=2000
+It should return all products in the clothing category where the price is less than or equal to 2000.
+
+

@@ -1,0 +1,8 @@
+if port error occure the run the command 
+echo $env:PORT
+
+so we hava ro remove it using a command => Remove-Ttem env:\PORT then remove the port no we have set before using a set PORT=3001 && node --watch app.js
+
+ again check using a command => echo $env:PORT
+ then npm run dev 
+ 

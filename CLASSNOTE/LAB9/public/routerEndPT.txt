@@ -1,0 +1,25 @@
+------------------- Difference Between Route and Endpoint in Express.js----------------
+-------------- Route:---------------
+A route is the URL pattern or path you define in your server (e.g., /users or /products/:id).
+
+Routes help organize how different paths are handled in your application.
+
+......Examples of routes:......
+/users
+/products/:id
+
+
+
+
+
+
+--------------------- Endpoint:----------------------------
+An endpoint is a combination of a route + HTTP method (e.g., GET /users, POST /products).
+
+Endpoints define the specific action that should happen for a given request type.
+
+....Examples of endpoints......
+GET /users
+POST /users
+DELETE /products/:id
+

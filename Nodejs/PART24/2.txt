@@ -1,0 +1,1 @@
+check synchronoue and Asynchronous -> run on the terminal

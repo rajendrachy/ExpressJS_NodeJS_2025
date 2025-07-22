@@ -1,0 +1,3 @@
+<!-- //Install ejs => npm install ejs -->
+  <!-- <p><%# name %></p>  it is like a comment -->
+ <!-- <p><%= name %></p> adding a dynamic javascript content -->

@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusSphere - Your Daily Productivity Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.15.8/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            transition: var(--transition);
+        }
+        
+        body.dark-mode {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        #root {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Auth Styles */
+        .auth-container {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+        
+        .auth-card {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .dark-mode .auth-card {
+            background: #1e293b;
+        }
+        
+        .auth-header {
+            background: var(--primary);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .auth-body {
+            padding: 30px;
+        }
+        
+        .auth-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .auth-subtitle {
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-input {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            background: var(--light);
+            font-size: 16px;
+        }
+        
+        .dark-mode .form-input {
+            background: #1e293b;
+            border-color: #334155;
+            color: white;
+        }
+        
+        .auth-btn {
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .auth-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .auth-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* App Styles */
+        .app-container {
+            display: flex;
+            flex: 1;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+        
+        .logo-container {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            background: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-links {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 0 12px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .nav-link i {
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            background: white;
+            box-shadow: var(--shadow);
+            z-index: 10;
+        }
+        
+        .dark-mode .header {
+            background: #1e293b;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .theme-toggle {
+            width: 50px;
+            height: 26px;
+            background: var(--light-gray);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .dark-mode .theme-toggle {
+            background: var(--primary);
+        }
+        
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .dark-mode .theme-toggle::before {
+            left: calc(100% - 23px);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .dashboard-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .dashboard-subtitle {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        .dark-mode .dashboard-subtitle {
+            color: #94a3b8;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .dark-mode .stat-card {
+            background: #1e293b;
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .stat-content {
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .dark-mode .stat-label {
+            color: #94a3b8;
+        }
+        
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        
+        .widget {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .dark-mode .widget {
+            background: #1e293b;
+        }
+        
+        .widget-header {
+            padding: 16px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .dark-mode .widget-header {
+            border-bottom: 1px solid #334155;
+        }
+        
+        .widget-content {
+            padding: 16px;
+        }
+        
+        /* Pomodoro Timer */
+        .pomodoro-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .timer-display {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .timer-text {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        .timer-label {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        
+        .timer-controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .timer-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .start-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .start-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .pause-btn {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .pause-btn:hover {
+            background-color: #e69008;
+        }
+        
+        .reset-btn {
+            background-color: var(--gray);
+            color: white;
+        }
+        
+        .reset-btn:hover {
+            background-color: #475569;
+        }
+        
+        /* Task List */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            background: var(--light);
+        }
+        
+        .dark-mode .task-item {
+            background: #1e293b;
+        }
+        
+        .task-checkbox {
+            margin-right: 12px;
+        }
+        
+        .task-content {
+            flex: 1;
+        }
+        
+        .task-title {
+            font-weight: 500;
+        }
+        
+        .task-priority {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+        
+        .priority-high {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .priority-medium {
+            background: var(--warning);
+            color: #1e293b;
+        }
+        
+        .priority-low {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .task-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .task-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .task-action-btn:hover {
+            color: var(--primary);
+        }
+        
+        .add-task-form {
+            display: flex;
+            margin-top: 16px;
+        }
+        
+        .task-input {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 8px 0 0 8px;
+            border: 1px solid var(--light-gray);
+            background: white;
+        }
+        
+        .dark-mode .task-input {
+            background: #1e293b;
+            border-color: #334155;
+            color: white;
+        }
+        
+        .priority-select {
+            border: 1px solid var(--light-gray);
+            border-left: none;
+            border-right: none;
+            background: white;
+            padding: 0 10px;
+        }
+        
+        .dark-mode .priority-select {
+            background: #1e293b;
+            border-color: #334155;
+            color: white;
+        }
+        
+        .add-task-btn {
+            padding: 10px 16px;
+            border-radius: 0 8px 8px 0;
+            border: none;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Calendar Preview */
+        .calendar-preview {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        
+        .calendar-day {
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .calendar-day.current {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .calendar-day.event {
+            position: relative;
+        }
+        
+        .calendar-day.event::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+        
+        .calendar-day-name {
+            font-size: 12px;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
+        
+        .calendar-day-number {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .events-list {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .event-item {
+            display: flex;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 8px;
+            background: var(--light);
+        }
+        
+        .dark-mode .event-item {
+            background: #1e293b;
+        }
+        
+        .event-time {
+            font-weight: 600;
+            min-width: 60px;
+        }
+        
+        .event-title {
+            flex: 1;
+        }
+        
+        /* Progress */
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .progress-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .dark-mode .progress-bar {
+            background: #334155;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .focus-progress {
+            background: var(--primary);
+            width: 75%;
+        }
+        
+        .task-progress {
+            background: var(--secondary);
+            width: 60%;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .logo span, .nav-link span {
+                display: none;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+            
+            .nav-link {
+                justify-content: center;
+                padding: 16px;
+            }
+            
+            .widget-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        
+        // Mock backend API functions
+        const api = {
+            // Authentication
+            login: async (email, password) => {
+                // In a real app, this would be a POST request to your backend
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            token: 'mock_jwt_token',
+                            user: {
+                                id: 1,
+                                name: 'John Doe',
+                                email: email,
+                                avatar: 'JD'
+                            }
+                        });
+                    }, 800);
+                });
+            },
+            
+            register: async (name, email, password) => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            token: 'mock_jwt_token',
+                            user: {
+                                id: 1,
+                                name: name,
+                                email: email,
+                                avatar: name.charAt(0) + name.split(' ')[1].charAt(0)
+                            }
+                        });
+                    }, 800);
+                });
+            },
+            
+            // Tasks
+            getTasks: async (userId) => {
+                const tasks = JSON.parse(localStorage.getItem(`focussphere_tasks_${userId}`)) || [];
+                return tasks;
+            },
+            
+            createTask: async (userId, task) => {
+                const tasks = JSON.parse(localStorage.getItem(`focussphere_tasks_${userId}`)) || [];
+                const newTask = {
+                    id: Date.now(),
+                    ...task
+                };
+                tasks.push(newTask);
+                localStorage.setItem(`focussphere_tasks_${userId}`, JSON.stringify(tasks));
+                return newTask;
+            },
+            
+            updateTask: async (userId, taskId, updates) => {
+                let tasks = JSON.parse(localStorage.getItem(`focussphere_tasks_${userId}`)) || [];
+                tasks = tasks.map(task => 
+                    task.id === taskId ? { ...task, ...updates } : task
+                );
+                localStorage.setItem(`focussphere_tasks_${userId}`, JSON.stringify(tasks));
+                return tasks.find(task => task.id === taskId);
+            },
+            
+            deleteTask: async (userId, taskId) => {
+                let tasks = JSON.parse(localStorage.getItem(`focussphere_tasks_${userId}`)) || [];
+                tasks = tasks.filter(task => task.id !== taskId);
+                localStorage.setItem(`focussphere_tasks_${userId}`, JSON.stringify(tasks));
+                return { success: true };
+            },
+            
+            // Pomodoro settings
+            getPomodoroSettings: async (userId) => {
+                const settings = JSON.parse(localStorage.getItem(`focussphere_pomodoro_${userId}`)) || {
+                    workDuration: 25,
+                    breakDuration: 5,
+                    longBreakDuration: 15,
+                    longBreakInterval: 4
+                };
+                return settings;
+            },
+            
+            savePomodoroSettings: async (userId, settings) => {
+                localStorage.setItem(`focussphere_pomodoro_${userId}`, JSON.stringify(settings));
+                return settings;
+            },
+            
+            // Events
+            getEvents: async (userId) => {
+                const events = JSON.parse(localStorage.getItem(`focussphere_events_${userId}`)) || [];
+                return events;
+            },
+            
+            createEvent: async (userId, event) => {
+                const events = JSON.parse(localStorage.getItem(`focussphere_events_${userId}`)) || [];
+                const newEvent = {
+                    id: Date.now(),
+                    ...event
+                };
+                events.push(newEvent);
+                localStorage.setItem(`focussphere_events_${userId}`, JSON.stringify(events));
+                return newEvent;
+            },
+            
+            updateEvent: async (userId, eventId, updates) => {
+                let events = JSON.parse(localStorage.getItem(`focussphere_events_${userId}`)) || [];
+                events = events.map(event => 
+                    event.id === eventId ? { ...event, ...updates } : event
+                );
+                localStorage.setItem(`focussphere_events_${userId}`, JSON.stringify(events));
+                return events.find(event => event.id === eventId);
+            },
+            
+            deleteEvent: async (userId, eventId) => {
+                let events = JSON.parse(localStorage.getItem(`focussphere_events_${userId}`)) || [];
+                events = events.filter(event => event.id !== eventId);
+                localStorage.setItem(`focussphere_events_${userId}`, JSON.stringify(events));
+                return { success: true };
+            },
+            
+            // Notes
+            getNotes: async (userId) => {
+                const notes = JSON.parse(localStorage.getItem(`focussphere_notes_${userId}`)) || [];
+                return notes;
+            },
+            
+            createNote: async (userId, note) => {
+                const notes = JSON.parse(localStorage.getItem(`focussphere_notes_${userId}`)) || [];
+                const newNote = {
+                    id: Date.now(),
+                    ...note,
+                    createdAt: new Date().toISOString()
+                };
+                notes.push(newNote);
+                localStorage.setItem(`focussphere_notes_${userId}`, JSON.stringify(notes));
+                return newNote;
+            },
+            
+            updateNote: async (userId, noteId, updates) => {
+                let notes = JSON.parse(localStorage.getItem(`focussphere_notes_${userId}`)) || [];
+                notes = notes.map(note => 
+                    note.id === noteId ? { ...note, ...updates, updatedAt: new Date().toISOString() } : note
+                );
+                localStorage.setItem(`focussphere_notes_${userId}`, JSON.stringify(notes));
+                return notes.find(note => note.id === noteId);
+            },
+            
+            deleteNote: async (userId, noteId) => {
+                let notes = JSON.parse(localStorage.getItem(`focussphere_notes_${userId}`)) || [];
+                notes = notes.filter(note => note.id !== noteId);
+                localStorage.setItem(`focussphere_notes_${userId}`, JSON.stringify(notes));
+                return { success: true };
+            }
+        };
+        
+        // Auth Context
+        const AuthContext = React.createContext();
+        
+        function AuthProvider({ children }) {
+            const [user, setUser] = useState(null);
+            const [loading, setLoading] = useState(true);
+            
+            useEffect(() => {
+                // Check if user is logged in
+                const token = localStorage.getItem('focussphere_token');
+                const userData = JSON.parse(localStorage.getItem('focussphere_user'));
+                
+                if (token && userData) {
+                    setUser(userData);
+                }
+                
+                setLoading(false);
+            }, []);
+            
+            const login = async (email, password) => {
+                try {
+                    const response = await api.login(email, password);
+                    localStorage.setItem('focussphere_token', response.token);
+                    localStorage.setItem('focussphere_user', JSON.stringify(response.user));
+                    setUser(response.user);
+                    return response;
+                } catch (error) {
+                    throw error;
+                }
+            };
+            
+            const register = async (name, email, password) => {
+                try {
+                    const response = await api.register(name, email, password);
+                    localStorage.setItem('focussphere_token', response.token);
+                    localStorage.setItem('focussphere_user', JSON.stringify(response.user));
+                    setUser(response.user);
+                    return response;
+                } catch (error) {
+                    throw error;
+                }
+            };
+            
+            const logout = () => {
+                localStorage.removeItem('focussphere_token');
+                localStorage.removeItem('focussphere_user');
+                setUser(null);
+            };
+            
+            const value = {
+                user,
+                loading,
+                login,
+                register,
+                logout
+            };
+            
+            return (
+                <AuthContext.Provider value={value}>
+                    {children}
+                </AuthContext.Provider>
+            );
+        }
+        
+        function useAuth() {
+            return React.useContext(AuthContext);
+        }
+        
+        // App component
+        function App() {
+            const { user, loading } = useAuth();
+            const [darkMode, setDarkMode] = useState(false);
+            
+            useEffect(() => {
+                // Load dark mode preference
+                const savedDarkMode = localStorage.getItem('focussphere_darkmode') === 'true';
+                setDarkMode(savedDarkMode);
+            }, []);
+            
+            useEffect(() => {
+                // Apply dark mode
+                document.body.classList.toggle('dark-mode', darkMode);
+                localStorage.setItem('focussphere_darkmode', darkMode);
+            }, [darkMode]);
+            
+            if (loading) {
+                return (
+                    <div className="auth-container">
+                        <div className="spinner"></div>
+                    </div>
+                );
+            }
+            
+            return (
+                <div className="app-container">
+                    {user ? (
+                        <MainApp darkMode={darkMode} setDarkMode={setDarkMode} />
+                    ) : (
+                        <AuthApp />
+                    )}
+                </div>
+            );
+        }
+        
+        // Auth App Component
+        function AuthApp() {
+            const [isLogin, setIsLogin] = useState(true);
+            const [name, setName] = useState('');
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
+            const [error, setError] = useState('');
+            const [loading, setLoading] = useState(false);
+            
+            const { login, register } = useAuth();
+            
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setLoading(true);
+                setError('');
+                
+                try {
+                    if (isLogin) {
+                        await login(email, password);
+                    } else {
+                        await register(name, email, password);
+                    }
+                } catch (err) {
+                    setError('Invalid credentials. Please try again.');
+                } finally {
+                    setLoading(false);
+                }
+            };
+            
+            return (
+                <div className="auth-container">
+                    <div className="auth-card">
+                        <div className="auth-header">
+                            <i className="fas fa-bullseye fa-3x"></i>
+                            <h1>FocusSphere</h1>
+                        </div>
+                        <div className="auth-body">
+                            <h2 className="auth-title">{isLogin ? 'Login' : 'Register'}</h2>
+                            <p className="auth-subtitle">
+                                {isLogin 
+                                    ? 'Welcome back! Please login to your account' 
+                                    : 'Create your FocusSphere account'}
+                            </p>
+                            
+                            {error && (
+                                <div className="error-message" style={{ 
+                                    color: 'var(--danger)', 
+                                    marginBottom: '20px',
+                                    padding: '10px',
+                                    background: 'rgba(239, 68, 68, 0.1)',
+                                    borderRadius: '8px'
+                                }}>
+                                    {error}
+                                </div>
+                            )}
+                            
+                            <form className="auth-form" onSubmit={handleSubmit}>
+                                {!isLogin && (
+                                    <div className="form-group">
+                                        <label className="form-label">Full Name</label>
+                                        <input
+                                            type="text"
+                                            className="form-input"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                )}
+                                
+                                <div className="form-group">
+                                    <label className="form-label">Email Address</label>
+                                    <input
+                                        type="email"
+                                        className="form-input"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                
+                                <div className="form-group">
+                                    <label className="form-label">Password</label>
+                                    <input
+                                        type="password"
+                                        className="form-input"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                
+                                <button 
+                                    type="submit" 
+                                    className="auth-btn"
+                                    disabled={loading}
+                                >
+                                    {loading ? (
+                                        <i className="fas fa-spinner fa-spin"></i>
+                                    ) : isLogin ? (
+                                        'Login'
+                                    ) : (
+                                        'Create Account'
+                                    )}
+                                </button>
+                            </form>
+                            
+                            <div className="auth-footer">
+                                {isLogin 
+                                    ? "Don't have an account? " 
+                                    : "Already have an account? "}
+                                <span 
+                                    className="auth-link" 
+                                    onClick={() => setIsLogin(!isLogin)}
+                                >
+                                    {isLogin ? 'Register' : 'Login'}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        // Main App Component
+        function MainApp({ darkMode, setDarkMode }) {
+            const { user, logout } = useAuth();
+            const [activeTab, setActiveTab] = useState('dashboard');
+            
+            const toggleTheme = () => {
+                setDarkMode(!darkMode);
+            };
+            
+            const handleLogout = () => {
+                logout();
+            };
+            
+            return (
+                <>
+                    <div className="sidebar">
+                        <div className="logo-container">
+                            <div className="logo">
+                                <i className="fas fa-bullseye"></i>
+                                <span>FocusSphere</span>
+                            </div>
+                        </div>
+                        
+                        <div className="nav-links">
+                            <div 
+                                className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('dashboard')}
+                            >
+                                <i className="fas fa-th-large"></i>
+                                <span>Dashboard</span>
+                            </div>
+                            
+                            <div 
+                                className={`nav-link ${activeTab === 'study' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('study')}
+                            >
+                                <i className="fas fa-graduation-cap"></i>
+                                <span>Study Center</span>
+                            </div>
+                            
+                            <div 
+                                className={`nav-link ${activeTab === 'news' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('news')}
+                            >
+                                <i className="fas fa-newspaper"></i>
+                                <span>News Hub</span>
+                            </div>
+                            
+                            <div 
+                                className={`nav-link ${activeTab === 'calendar' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('calendar')}
+                            >
+                                <i className="fas fa-calendar"></i>
+                                <span>Smart Calendar</span>
+                            </div>
+                            
+                            <div 
+                                className={`nav-link ${activeTab === 'notes' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('notes')}
+                            >
+                                <i className="fas fa-sticky-note"></i>
+                                <span>Notes</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="main-content">
+                        <div className="header">
+                            <div className="header-title">
+                                {activeTab === 'dashboard' && 'Dashboard'}
+                                {activeTab === 'study' && 'Study Center'}
+                                {activeTab === 'news' && 'News Hub'}
+                                {activeTab === 'calendar' && 'Smart Calendar'}
+                                {activeTab === 'notes' && 'My Notes'}
+                            </div>
+                            <div className="header-actions">
+                                <div className="theme-toggle" onClick={toggleTheme}></div>
+                                <div className="user-profile">
+                                    <div className="avatar">{user.avatar}</div>
+                                    <span>{user.name}</span>
+                                    <button 
+                                        onClick={handleLogout}
+                                        style={{
+                                            background: 'none',
+                                            border: 'none',
+                                            color: 'var(--danger)',
+                                            cursor: 'pointer',
+                                            marginLeft: '10px'
+                                        }}
+                                    >
+                                        <i className="fas fa-sign-out-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="content-area">
+                            {activeTab === 'dashboard' && <Dashboard darkMode={darkMode} user={user} />}
+                            {activeTab === 'study' && <StudyCenter darkMode={darkMode} user={user} />}
+                            {activeTab === 'news' && <NewsHub darkMode={darkMode} />}
+                            {activeTab === 'calendar' && <SmartCalendar darkMode={darkMode} user={user} />}
+                            {activeTab === 'notes' && <NotesManager darkMode={darkMode} user={user} />}
+                        </div>
+                    </div>
+                </>
+            );
+        }
+        
+        // Dashboard component
+        function Dashboard({ darkMode, user }) {
+            const [tasks, setTasks] = useState([]);
+            const [loading, setLoading] = useState(true);
+            
+            useEffect(() => {
+                const fetchTasks = async () => {
+                    try {
+                        const tasks = await api.getTasks(user.id);
+                        setTasks(tasks);
+                    } catch (error) {
+                        console.error('Error fetching tasks:', error);
+                    } finally {
+                        setLoading(false);
+                    }
+                };
+                
+                fetchTasks();
+            }, [user.id]);
+            
+            return (
+                <div className="dashboard">
+                    <div>
+                        <h1 className="dashboard-title">Welcome back, {user.name}!</h1>
+                        <p className="dashboard-subtitle">Your productivity dashboard</p>
+                    </div>
+                    
+                    <div className="stats-container">
+                        <div className="stat-card">
+                            <div className="stat-icon" style={{background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary)'}}>
+                                <i className="fas fa-fire"></i>
+                            </div>
+                            <div className="stat-content">
+                                <div className="stat-value">12</div>
+                                <div className="stat-label">Current Streak</div>
+                            </div>
+                        </div>
+                        
+                        <div className="stat-card">
+                            <div className="stat-icon" style={{background: 'rgba(16, 185, 129, 0.1)', color: 'var(--secondary)'}}>
+                                <i className="fas fa-tasks"></i>
+                            </div>
+                            <div className="stat-content">
+                                <div className="stat-value">85%</div>
+                                <div className="stat-label">Task Completion</div>
+                            </div>
+                        </div>
+                        
+                        <div className="stat-card">
+                            <div className="stat-icon" style={{background: 'rgba(59, 130, 246, 0.1)', color: 'var(--info)'}}>
+                                <i className="fas fa-clock"></i>
+                            </div>
+                            <div className="stat-content">
+                                <div className="stat-value">42h</div>
+                                <div className="stat-label">Focus Time</div>
+                            </div>
+                        </div>
+                        
+                        <div className="stat-card">
+                            <div className="stat-icon" style={{background: 'rgba(245, 158, 11, 0.1)', color: 'var(--warning)'}}>
+                                <i className="fas fa-trophy"></i>
+                            </div>
+                            <div className="stat-content">
+                                <div className="stat-value">3</div>
+                                <div className="stat-label">Achievements</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="widget-grid">
+                        <div className="widget">
+                            <div className="widget-header">Focus Timer</div>
+                            <div className="widget-content">
+                                <PomodoroTimer darkMode={darkMode} user={user} />
+                            </div>
+                        </div>
+                        
+                        <div className="widget">
+                            <div className="widget-header">Tasks</div>
+                            <div className="widget-content">
+                                <TodoList darkMode={darkMode} user={user} tasks={tasks} setTasks={setTasks} />
+                            </div>
+                        </div>
+                        
+                        <div className="widget">
+                            <div className="widget-header">Today's Schedule</div>
+                            <div className="widget-content">
+                                <CalendarPreview darkMode={darkMode} />
+                            </div>
+                        </div>
+                        
+                        <div className="widget">
+                            <div className="widget-header">Progress</div>
+                            <div className="widget-content">
+                                <ProgressTracker darkMode={darkMode} />
+                            </div>
+                        </div>
+                        
+                        <div className="widget">
+                            <div className="widget-header">Quick Notes</div>
+                            <div className="widget-content">
+                                <div className="notes-container">
+                                    <textarea 
+                                        className="notes-textarea" 
+                                        placeholder="Jot down your thoughts..."
+                                        rows="4"
+                                        style={{
+                                            width: '100%',
+                                            padding: '12px',
+                                            borderRadius: '8px',
+                                            border: '1px solid var(--light-gray)',
+                                            background: darkMode ? '#1e293b' : 'white',
+                                            color: darkMode ? '#e2e8f0' : '#1e293b'
+                                        }}
+                                    ></textarea>
+                                    <button 
+                                        className="notes-save-btn" 
+                                        style={{
+                                            marginTop: '12px',
+                                            padding: '10px 16px',
+                                            background: 'var(--primary)',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '8px',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        Save Note
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        // Pomodoro Timer component
+        function PomodoroTimer({ darkMode, user }) {
+            const [isActive, setIsActive] = useState(false);
+            const [isPaused, setIsPaused] = useState(true);
+            const [time, setTime] = useState(25 * 60);
+            const [mode, setMode] = useState('work');
+            const [workDuration, setWorkDuration] = useState(25);
+            const [breakDuration, setBreakDuration] = useState(5);
+            const [settingsLoaded, setSettingsLoaded] = useState(false);
+            const intervalRef = useRef(null);
+            
+            useEffect(() => {
+                // Load settings from backend
+                const loadSettings = async () => {
+                    try {
+                        const settings = await api.getPomodoroSettings(user.id);
+                        setWorkDuration(settings.workDuration);
+                        setBreakDuration(settings.breakDuration);
+                        setTime(settings.workDuration * 60);
+                        setSettingsLoaded(true);
+                    } catch (error) {
+                        console.error('Error loading settings:', error);
+                    }
+                };
+                
+                loadSettings();
+            }, [user.id]);
+            
+            useEffect(() => {
+                if (settingsLoaded) {
+                    // Save settings to backend when they change
+                    api.savePomodoroSettings(user.id, {
+                        workDuration,
+                        breakDuration
+                    });
+                }
+            }, [workDuration, breakDuration, user.id, settingsLoaded]);
+            
+            const startTimer = () => {
+                setIsActive(true);
+                setIsPaused(false);
+                intervalRef.current = setInterval(() => {
+                    setTime((time) => {
+                        if (time === 0) {
+                            clearInterval(intervalRef.current);
+                            // Switch mode
+                            if (mode === 'work') {
+                                setMode('break');
+                                return breakDuration * 60;
+                            } else {
+                                setMode('work');
+                                return workDuration * 60;
+                            }
+                        }
+                        return time - 1;
+                    });
+                }, 1000);
+            };
+            
+            const pauseTimer = () => {
+                clearInterval(intervalRef.current);
+                setIsPaused(true);
+            };
+            
+            const resetTimer = () => {
+                clearInterval(intervalRef.current);
+                setIsActive(false);
+                setIsPaused(true);
+                setMode('work');
+                setTime(workDuration * 60);
+            };
+            
+            const formatTime = () => {
+                const minutes = Math.floor(time / 60);
+                const seconds = time % 60;
+                return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            };
+            
+            return (
+                <div className="pomodoro-container">
+                    <div className="timer-display">
+                        <div className="timer-text">{formatTime()}</div>
+                        <div className="timer-label">{mode === 'work' ? 'Focus Time' : 'Break Time'}</div>
+                    </div>
+                    
+                    <div className="timer-controls">
+                        {!isActive && !isPaused ? (
+                            <button className="timer-btn start-btn" onClick={startTimer}>
+                                Start Focus
+                            </button>
+                        ) : isPaused ? (
+                            <button className="timer-btn start-btn" onClick={startTimer}>
+                                Resume
+                            </button>
+                        ) : (
+                            <button className="timer-btn pause-btn" onClick={pauseTimer}>
+                                Pause
+                            </button>
+                        )}
+                        <button className="timer-btn reset-btn" onClick={resetTimer}>
+                            Reset
+                        </button>
+                    </div>
+                    
+                    <div style={{ marginTop: '20px', width: '100%' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                            <div>
+                                <label style={{ display: 'block', marginBottom: '5px' }}>Work (min)</label>
+                                <input 
+                                    type="number" 
+                                    min="1"
+                                    max="60"
+                                    value={workDuration}
+                                    onChange={(e) => setWorkDuration(parseInt(e.target.value) || 25)}
+                                    style={{
+                                        width: '80px',
+                                        padding: '8px',
+                                        borderRadius: '8px',
+                                        border: '1px solid var(--light-gray)',
+                                        background: darkMode ? '#1e293b' : 'white',
+                                        color: darkMode ? 'white' : 'inherit'
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <label style={{ display: 'block', marginBottom: '5px' }}>Break (min)</label>
+                                <input 
+                                    type="number" 
+                                    min="1"
+                                    max="30"
+                                    value={breakDuration}
+                                    onChange={(e) => setBreakDuration(parseInt(e.target.value) || 5)}
+                                    style={{
+                                        width: '80px',
+                                        padding: '8px',
+                                        borderRadius: '8px',
+                                        border: '1px solid var(--light-gray)',
+                                        background: darkMode ? '#1e293b' : 'white',
+                                        color: darkMode ? 'white' : 'inherit'
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        // TodoList component
+        function TodoList({ darkMode, user, tasks, setTasks }) {
+            const [newTask, setNewTask] = useState('');
+            const [priority, setPriority] = useState('medium');
+            
+            useEffect(() => {
+                const fetchTasks = async () => {
+                    try {
+                        const tasks = await api.getTasks(user.id);
+                        setTasks(tasks);
+                    } catch (error) {
+                        console.error('Error fetching tasks:', error);
+                    }
+                };
+                
+                fetchTasks();
+            }, [user.id, setTasks]);
+            
+            const addTask = async () => {
+                if (newTask.trim() !== '') {
+                    try {
+                        const task = {
+                            text: newTask,
+                            completed: false,
+                            priority: priority
+                        };
+                        
+                        const newTaskItem = await api.createTask(user.id, task);
+                        setTasks([...tasks, newTaskItem]);
+                        setNewTask('');
+                    } catch (error) {
+                        console.error('Error adding task:', error);
+                    }
+                }
+            };
+            
+            const toggleTask = async (id) => {
+                try {
+                    const taskToUpdate = tasks.find(task => task.id === id);
+                    await api.updateTask(user.id, id, { completed: !taskToUpdate.completed });
+                    
+                    setTasks(
+                        tasks.map(task => 
+                            task.id === id ? { ...task, completed: !task.completed } : task
+                        )
+                    );
+                } catch (error) {
+                    console.error('Error updating task:', error);
+                }
+            };
+            
+            const deleteTask = async (id) => {
+                try {
+                    await api.deleteTask(user.id, id);
+                    setTasks(tasks.filter(task => task.id !== id));
+                } catch (error) {
+                    console.error('Error deleting task:', error);
+                }
+            };
+            
+            return (
+                <div>
+                    <div className="task-list">
+                        {tasks.filter(task => !task.completed).map(task => (
+                            <div key={task.id} className="task-item">
+                                <input 
+                                    type="checkbox" 
+                                    className="task-checkbox" 
+                                    checked={task.completed}
+                                    onChange={() => toggleTask(task.id)}
+                                />
+                                <div className="task-content">
+                                    <span className="task-title">{task.text}</span>
+                                    <span className={`task-priority priority-${task.priority}`}>
+                                        {task.priority}
+                                    </span>
+                                </div>
+                                <div className="task-actions">
+                                    <button 
+                                        className="task-action-btn"
+                                        onClick={() => deleteTask(task.id)}
+                                    >
+                                        <i className="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                        
+                        {tasks.filter(task => task.completed).length > 0 && (
+                            <div style={{ marginTop: '16px' }}>
+                                <h3 style={{ marginBottom: '8px', opacity: 0.7 }}>Completed</h3>
+                                {tasks.filter(task => task.completed).map(task => (
+                                    <div key={task.id} className="task-item" style={{ opacity: 0.7 }}>
+                                        <input 
+                                            type="checkbox" 
+                                            className="task-checkbox" 
+                                            checked={task.completed}
+                                            onChange={() => toggleTask(task.id)}
+                                        />
+                                        <div className="task-content">
+                                            <span className="task-title" style={{ textDecoration: 'line-through' }}>
+                                                {task.text}
+                                            </span>
+                                        </div>
+                                        <div className="task-actions">
+                                            <button 
+                                                className="task-action-btn"
+                                                onClick={() => deleteTask(task.id)}
+                                            >
+                                                <i className="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    
+                    <div className="add-task-form">
+                        <input 
+                            type="text" 
+                            className="task-input" 
+                            value={newTask}
+                            onChange={(e) => setNewTask(e.target.value)}
+                            placeholder="Add a new task..."
+                            onKeyPress={(e) => e.key === 'Enter' && addTask()}
+                        />
+                        <select 
+                            className="priority-select" 
+                            value={priority}
+                            onChange={(e) => setPriority(e.target.value)}
+                        >
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                        <button className="add-task-btn" onClick={addTask}>
+                            <i className="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+        
+        // CalendarPreview component
+        function CalendarPreview({ darkMode }) {
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const currentDate = new Date();
+            const currentDay = currentDate.getDate();
+            
+            return (
+                <div>
+                    <div className="calendar-preview">
+                        {days.map(day => (
+                            <div key={day} className="calendar-day">
+                                <div className="calendar-day-name">{day}</div>
+                            </div>
+                        ))}
+                        
+                        {Array.from({ length: 7 }, (_, i) => i + 15).map(day => (
+                            <div 
+                                key={day} 
+                                className={`calendar-day ${day === currentDay ? 'current' : ''} ${day % 3 === 0 ? 'event' : ''}`}
+                            >
+                                <div className="calendar-day-number">{day}</div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    <div className="events-list">
+                        <div className="event-item">
+                            <div className="event-time">10:00 AM</div>
+                            <div className="event-title">Team Meeting</div>
+                        </div>
+                        <div className="event-item">
+                            <div className="event-time">2:30 PM</div>
+                            <div className="event-title">Doctor Appointment</div>
+                        </div>
+                        <div className="event-item">
+                            <div className="event-time">6:00 PM</div>
+                            <div className="event-title">Gym Session</div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        // ProgressTracker component
+        function ProgressTracker({ darkMode }) {
+            return (
+                <div className="progress-container">
+                    <div className="progress-item">
+                        <div className="progress-header">
+                            <span>Daily Focus</span>
+                            <span>75%</span>
+                        </div>
+                        <div className="progress-bar">
+                            <div className="progress-fill focus-progress"></div>
+                        </div>
+                    </div>
+                    
+                    <div className="progress-item">
+                        <div className="progress-header">
+                            <span>Task Completion</span>
+                            <span>60%</span>
+                        </div>
+                        <div className="progress-bar">
+                            <div className="progress-fill task-progress"></div>
+                        </div>
+                    </div>
+                    
+                    <div className="stats-container">
+                        <div className="stat-item">
+                            <div className="stat-value">12</div>
+                            <div className="stat-label">Streak</div>
+                        </div>
+                        <div className="stat-item">
+                            <div className="stat-value">3</div>
+                            <div className="stat-label">Achievements</div>
+                        </div>
+                        <div className="stat-item">
+                            <div className="stat-value">85%</div>
+                            <div className="stat-label">Productivity</div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        // StudyCenter component
+        function StudyCenter({ darkMode, user }) {
+            return (
+                <div>
+                    <h1 className="dashboard-title">Study Center</h1>
+                    <p className="dashboard-subtitle">Your dedicated space for focused learning</p>
+                    
+                    <div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+                        <div className="widget">
+                            <div className="widget-header">Flashcards</div>
+                            <div className="widget-content">
+                                <div style={{ textAlign: 'center', padding: '20px' }}>
+                                    <div style={{ 
+                                        height: '200px', 
+                                        display: 'flex', 
+                                        alignItems: 'center', 
+                                        justifyContent: 'center',
+                                        background: darkMode ? '#1e293b' : '#f1f5f9',
+                                        borderRadius: '12px',
+                                        marginBottom: '20px',
+                                        fontSize: '18px',
+                                        fontWeight: '500'
+                                    }}>
+                                        What is the capital of France?
+                                    </div>
+                                    <button 
+                                        style={{
+                                            padding: '10px 20px',
+                                            background: 'var(--primary)',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '8px',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        Flip Card
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="widget">
+                            <div className="widget-header">AI Study Assistant</div>
+                            <div className="widget-content">
+                                <div style={{ padding: '16px' }}>
+                                    <p style={{ marginBottom: '16px' }}>Ask anything about your study materials:</p>
+                                    <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                                        <input 
+                                            type="text" 
+                                            placeholder="Ask a question..." 
+                                            style={{
+                                                flex: '1',
+                                                padding: '10px 16px',
+                                                borderRadius: '8px',
+                                                border: '1px solid var(--light-gray)',
+                                                background: darkMode ? '#1e293b' : 'white'
+                                            }}
+                                        />
+                                        <button 
+                                            style={{
+                                                padding: '10px 16px',
+                                                background: 'var(--primary)',
+                                                color: 'white',
+                                                border: 'none',
+                                                borderRadius: '8px',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            Ask
+                                        </button>
+                                    </div>
+                                    <div style={{ 
+                                        padding: '16px', 
+                                        background: darkMode ? '#1e293b' : '#f1f5f9',
+                                        borderRadius: '8px',
+                                        fontSize: '14px'
+                                    }}>
+                                        <p>Try asking: "Explain quantum physics in simple terms" or "Help me create a study plan for calculus"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        // NewsHub component
+        function NewsHub({ darkMode }) {
+            const newsItems = [
+                { 
+                    id: 1, 
+                    title: 'New Breakthrough in Renewable Energy', 
+                    category: 'Tech',
+                    summary: 'Scientists have developed a new solar panel technology that increases efficiency by 40%.'
+                },
+                { 
+                    id: 2, 
+                    title: 'Global Economic Forum Concludes', 
+                    category: 'World',
+                    summary: 'World leaders agree on new framework for international trade cooperation.'
+                },
+                { 
+                    id: 3, 
+                    title: 'Study Shows Benefits of Mediterranean Diet', 
+                    category: 'Health',
+                    summary: 'New research confirms the long-term health benefits of the Mediterranean diet pattern.'
+                },
+                { 
+                    id: 4, 
+                    title: 'Tech Giants Announce AI Partnership', 
+                    category: 'Tech',
+                    summary: 'Leading tech companies form alliance to develop ethical AI guidelines.'
+                }
+            ];
+            
+            return (
+                <div>
+                    <h1 className="dashboard-title">News Hub</h1>
+                    <p className="dashboard-subtitle">Stay informed with curated news from trusted sources</p>
+                    
+                    <div style={{ marginTop: '24px', display: 'flex', gap: '16px', marginBottom: '24px' }}>
+                        {['All', 'Tech', 'World', 'Health', 'Science', 'Business'].map(category => (
+                            <button 
+                                key={category}
+                                style={{
+                                    padding: '8px 16px',
+                                    background: category === 'All' ? 'var(--primary)' : (darkMode ? '#1e293b' : 'white'),
+                                    color: category === 'All' ? 'white' : 'inherit',
+                                    border: '1px solid var(--light-gray)',
+                                    borderRadius: '20px',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
+                    
+                    <div className="widget-grid">
+                        {newsItems.map(news => (
+                            <div key={news.id} className="widget">
+                                <div 
+                                    className="widget-header"
+                                    style={{ 
+                                        display: 'flex', 
+                                        justifyContent: 'space-between', 
+                                        alignItems: 'center' 
+                                    }}
+                                >
+                                    <span>{news.category}</span>
+                                    <button 
+                                        style={{ 
+                                            background: 'none', 
+                                            border: 'none', 
+                                            color: 'var(--primary)', 
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        <i className="far fa-bookmark"></i>
+                                    </button>
+                                </div>
+                                <div className="widget-content">
+                                    <h3 style={{ marginBottom: '8px' }}>{news.title}</h3>
+                                    <p style={{ marginBottom: '16px', fontSize: '14px' }}>{news.summary}</p>
+                                    <button 
+                                        style={{
+                                            padding: '8px 16px',
+                                            background: 'var(--primary)',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '8px',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        Read Full Article
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+        
+        // SmartCalendar component
+        function SmartCalendar({ darkMode, user }) {
+            const [view, setView] = useState('month');
+            const [events, setEvents] = useState([]);
+            const [loading, setLoading] = useState(true);
+            
+            useEffect(() => {
+                const fetchEvents = async () => {
+                    try {
+                        const events = await api.getEvents(user.id);
+                        setEvents(events);
+                    } catch (error) {
+                        console.error('Error fetching events:', error);
+                    } finally {
+                        setLoading(false);
+                    }
+                };
+                
+                fetchEvents();
+            }, [user.id]);
+            
+            return (
+                <div>
+                    <h1 className="dashboard-title">Smart Calendar</h1>
+                    <p className="dashboard-subtitle">Plan your schedule and maximize productivity</p>
+                    
+                    <div style={{ 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center', 
+                        marginTop: '24px', 
+                        marginBottom: '24px' 
+                    }}>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                            {['day', 'week', 'month'].map(v => (
+                                <button 
+                                    key={v}
+                                    style={{
+                                        padding: '8px 16px',
+                                        background: view === v ? 'var(--primary)' : (darkMode ? '#1e293b' : 'white'),
+                                        color: view === v ? 'white' : 'inherit',
+                                        border: '1px solid var(--light-gray)',
+                                        borderRadius: '8px',
+                                        cursor: 'pointer',
+                                        textTransform: 'capitalize'
+                                    }}
+                                    onClick={() => setView(v)}
+                                >
+                                    {v}
+                                </button>
+                            ))}
+                        </div>
+                        
+                        <button 
+                            style={{
+                                padding: '10px 16px',
+                                background: 'var(--primary)',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px'
+                            }}
+                        >
+                            <i className="fas fa-plus"></i>
+                            <span>Add Event</span>
+                        </button>
+                    </div>
+                    
+                    <div className="widget">
+                        <div className="widget-header">June 2023</div>
+                        <div className="widget-content">
+                            <div style={{ 
+                                display: 'grid', 
+                                gridTemplateColumns: 'repeat(7, 1fr)', 
+                                gap: '4px', 
+                                marginBottom: '20px' 
+                            }}>
+                                {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
+                                    <div 
+                                        key={day} 
+                                        style={{ 
+                                            textAlign: 'center', 
+                                            padding: '12px 0', 
+                                            fontWeight: '600',
+                                            color: 'var(--gray)'
+                                        }}
+                                    >
+                                        {day}
+                                    </div>
+                                ))}
+                                
+                                {Array.from({ length: 35 }, (_, i) => {
+                                    const day = i - 4; // Start from June 1
+                                    if (day < 1 || day > 30) {
+                                        return <div key={i} style={{ padding: '12px 0' }}></div>;
+                                    }
+                                    
+                                    return (
+                                        <div 
+                                            key={i} 
+                                            style={{ 
+                                                textAlign: 'center', 
+                                                padding: '12px 0',
+                                                background: day === 15 ? 'var(--primary)' : 'transparent',
+                                                color: day === 15 ? 'white' : (day === 7 ? 'var(--danger)' : 'inherit'),
+                                                borderRadius: '8px',
+                                                position: 'relative'
+                                            }}
+                                        >
+                                            {day}
+                                            {(day === 5 || day === 12 || day === 19 || day === 26) && (
+                                                <div style={{
+                                                    position: 'absolute',
+                                                    bottom: '4px',
+                                                    left: '50%',
+                                                    transform: 'translateX(-50%)',
+                                                    width: '6px',
+                                                    height: '6px',
+                                                    borderRadius: '50%',
+                                                    background: 'var(--primary)'
+                                                }}></div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            
+                            <div>
+                                <h3 style={{ marginBottom: '16px' }}>Upcoming Events</h3>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                    {events.slice(0, 3).map(event => (
+                                        <div key={event.id} style={{ 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            gap: '12px',
+                                            padding: '12px',
+                                            background: darkMode ? '#1e293b' : '#f1f5f9',
+                                            borderRadius: '8px'
+                                        }}>
+                                            <div style={{ 
+                                                width: '40px', 
+                                                height: '40px', 
+                                                background: 'var(--primary)', 
+                                                borderRadius: '8px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: 'white',
+                                                fontWeight: '600'
+                                            }}>
+                                                {new Date(event.date).getDate()}
+                                            </div>
+                                            <div>
+                                                <div style={{ fontWeight: '600' }}>{event.title}</div>
+                                                <div style={{ fontSize: '14px', opacity: 0.7 }}>
+                                                    {event.time} - {event.location || 'No location'}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        // Notes Manager Component
+        function NotesManager({ darkMode, user }) {
+            const [notes, setNotes] = useState([]);
+            const [activeNote, setActiveNote] = useState(null);
+            const [title, setTitle] = useState('');
+            const [content, setContent] = useState('');
+            const [loading, setLoading] = useState(true);
+            
+            useEffect(() => {
+                const fetchNotes = async () => {
+                    try {
+                        const notes = await api.getNotes(user.id);
+                        setNotes(notes);
+                        if (notes.length > 0 && !activeNote) {
+                            setActiveNote(notes[0].id);
+                            setTitle(notes[0].title);
+                            setContent(notes[0].content);
+                        }
+                    } catch (error) {
+                        console.error('Error fetching notes:', error);
+                    } finally {
+                        setLoading(false);
+                    }
+                };
+                
+                fetchNotes();
+            }, [user.id, activeNote]);
+            
+            const handleSave = async () => {
+                if (!title.trim()) return;
+                
+                try {
+                    if (activeNote) {
+                        // Update existing note
+                        await api.updateNote(user.id, activeNote, { title, content });
+                        setNotes(notes.map(note => 
+                            note.id === activeNote ? { ...note, title, content } : note
+                        ));
+                    } else {
+                        // Create new note
+                        const newNote = await api.createNote(user.id, { title, content });
+                        setNotes([...notes, newNote]);
+                        setActiveNote(newNote.id);
+                    }
+                } catch (error) {
+                    console.error('Error saving note:', error);
+                }
+            };
+            
+            const handleNewNote = () => {
+                setActiveNote(null);
+                setTitle('');
+                setContent('');
+            };
+            
+            const handleDelete = async () => {
+                if (!activeNote) return;
+                
+                try {
+                    await api.deleteNote(user.id, activeNote);
+                    setNotes(notes.filter(note => note.id !== activeNote));
+                    
+                    if (notes.length > 0) {
+                        const nextNote = notes.find(note => note.id !== activeNote) || notes[0];
+                        setActiveNote(nextNote.id);
+                        setTitle(nextNote.title);
+                        setContent(nextNote.content);
+                    } else {
+                        setActiveNote(null);
+                        setTitle('');
+                        setContent('');
+                    }
+                } catch (error) {
+                    console.error('Error deleting note:', error);
+                }
+            };
+            
+            if (loading) {
+                return (
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        <div className="spinner"></div>
+                    </div>
+                );
+            }
+            
+            return (
+                <div style={{ display: 'flex', height: '100%', gap: '24px' }}>
+                    <div style={{ width: '250px', borderRight: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`, paddingRight: '24px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                            <h2 style={{ fontSize: '20px' }}>My Notes</h2>
+                            <button 
+                                onClick={handleNewNote}
+                                style={{
+                                    background: 'var(--primary)',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    padding: '8px 16px',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px'
+                                }}
+                            >
+                                <i className="fas fa-plus"></i>
+                                <span>New</span>
+                            </button>
+                        </div>
+                        
+                        <div style={{ maxHeight: 'calc(100vh - 200px)', overflowY: 'auto' }}>
+                            {notes.map(note => (
+                                <div 
+                                    key={note.id}
+                                    style={{
+                                        padding: '12px',
+                                        borderRadius: '8px',
+                                        marginBottom: '8px',
+                                        background: activeNote === note.id ? (darkMode ? '#334155' : '#e2e8f0') : 'transparent',
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={() => {
+                                        setActiveNote(note.id);
+                                        setTitle(note.title);
+                                        setContent(note.content);
+                                    }}
+                                >
+                                    <div style={{ fontWeight: '600', marginBottom: '4px' }}>{note.title}</div>
+                                    <div style={{ 
+                                        fontSize: '12px', 
+                                        color: 'var(--gray)',
+                                        whiteSpace: 'nowrap',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }}>
+                                        {note.content.substring(0, 100)}...
+                                    </div>
+                                </div>
+                            ))}
+                            
+                            {notes.length === 0 && (
+                                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--gray)' }}>
+                                    <i className="fas fa-sticky-note fa-2x" style={{ marginBottom: '10px' }}></i>
+                                    <p>No notes yet. Create your first note!</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                        <input 
+                            type="text" 
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="Note title"
+                            style={{
+                                padding: '16px',
+                                fontSize: '24px',
+                                fontWeight: '700',
+                                border: 'none',
+                                background: 'transparent',
+                                marginBottom: '16px'
+                            }}
+                        />
+                        
+                        <textarea 
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            placeholder="Start writing your note here..."
+                            style={{
+                                flex: 1,
+                                padding: '16px',
+                                border: 'none',
+                                background: 'transparent',
+                                resize: 'none',
+                                fontSize: '16px',
+                                lineHeight: '1.6'
+                            }}
+                        ></textarea>
+                        
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '20px' }}>
+                            {activeNote && (
+                                <button 
+                                    onClick={handleDelete}
+                                    style={{
+                                        padding: '10px 16px',
+                                        background: 'var(--danger)',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    <i className="fas fa-trash"></i> Delete
+                                </button>
+                            )}
+                            
+                            <button 
+                                onClick={handleSave}
+                                style={{
+                                    padding: '10px 16px',
+                                    background: 'var(--primary)',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                <i className="fas fa-save"></i> Save Note
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        // Render the app
+        function AppWrapper() {
+            return (
+                <AuthProvider>
+                    <App />
+                </AuthProvider>
+            );
+        }
+        
+        ReactDOM.render(<AppWrapper />, document.getElementById('root'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+Done in part 37 app.js file
+Port define using a => $env:PORT= 3000; node --watch .\app.js (fileName)  // this command should be run in the powerShell
+
+
+and another way,
+set PORT=3001 && node --watch app.js // this command should be run in the command propmpt
+
+
+// dont need to run this in the command there is simplest version

@@ -1,0 +1,61 @@
+<!-- //-------------part47----------------- -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Part47</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Home Page</h1>
+
+  <form action="/contact" method="post">
+      <div>
+        <label for="name">Name</label>
+        <!-- <input type="text" name="name" id="name"> -->
+
+
+        <!-- for app.use(express.urlencoded({extended : true})); -->
+         <input type="text" name="user[name]" id="name">
+      </div>
+
+      <div>
+        <label for="message">Message</label>
+        <!-- <textarea name="message" id="message" placeholder="Write your message here "></textarea> -->
+
+
+        <!-- for app.use(express.urlencoded({extended : true})); -->
+        <textarea name="user[message]" id="message" placeholder="Write your message here "></textarea>
+
+        <!-- Server starting on port 3000
+{ user: { name: 'rahd', message: 'sdkhf' } } --> 
+ <!-- this output using extended:true -->
+
+
+      </div>
+
+
+
+      <button>Submit</button>
+  </form>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="style.css">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Part42</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h2>Never lose hope.</h2>
+  <img src="home.jpeg" alt="Hope Image" class="hope-image" />
+</body>
+</html> -->

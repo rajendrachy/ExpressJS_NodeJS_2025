@@ -1,0 +1,16 @@
+s// dont need to run this in the command there is simplest version
+create one file .env
+and set PORT=NUmber(3000) then add in the package.json
+"dev" : "node --watch app.js" // in script section
+add this help to easy and run using a command => npm run dev
+
+Server is running at port : http:localhost:undefined
+add this to fix =>     "dev" : "node --env-file=.env --watch app.js" in script section
+
+
+
+
+
+// then, create a .env-example and define PORT=""
+// and then, again add .gitignore file and add .env file
+
