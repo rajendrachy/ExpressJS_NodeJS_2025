@@ -1,0 +1,5 @@
+In Node.js, a server refers to a software application or program that listens for incoming requests from clients (such as web browsers or other applications) and responds to those requests.
+
+
+Node.js enables developers to use JavaScript on both the client-side (browser) and server-side,
+
