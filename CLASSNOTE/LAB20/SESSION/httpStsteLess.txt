@@ -1,0 +1,119 @@
+In Express.js, and in HTTP in general, the statelessness of HTTP requests is an important concept.
+
+----------- What Does "Stateless" Mean?---------------
+HTTP is a stateless protocol, meaning:
+
+
+
+Each HTTP request from a client to server is independent.
+
+The server does not retain any information about previous requests made by the same client.
+
+There is no built-in memory of user sessions or actions between requests.
+
+
+
+------------Example:---------------
+If you make two HTTP requests to the same route in Express.js, the server does not automatically know they are from the same user.
+
+
+------------ Express.js and Statelessness--------------
+In Express.js, by default:
+
+app.get('/hello', (req, res) => {
+  res.send('Hello World');
+});
+
+
+Each time this route is hit:
+The server processes the request.
+Responds independently.
+No state is saved between requests.
+
+
+
+
+
+
+//-------------to solve this problem use => -------------------------
+
+🗂 Folder Structure
+session-counter/
+├── app.js
+├── package.json
+
+
+
+
+---------------Step-by-Step Instructions--------------------
+1. Create the Folder and Install Dependencies
+mkdir session-counter
+cd session-counter
+npm init -y
+npm install express express-session
+
+
+
+
+
+
+
+2. Create app.js
+// app.js
+const express = require('express');
+const session = require('express-session');
+
+const app = express();
+const PORT = 3000;
+
+// Session middleware
+app.use(session({
+  secret: 'count-secret',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Route to count visits
+app.get('/', (req, res) => {
+  // Initialize counter if it doesn't exist
+  if (!req.session.count) {
+    req.session.count = 1;
+  } else {
+    req.session.count++;
+  }
+
+  res.send(`
+    <h1>Simple Counter</h1>
+    <p>You have refreshed this page <strong>${req.session.count}</strong> times.</p>
+  `);
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
+});
+
+
+
+
+
+-------------- Run the App------------
+In terminal:
+node app.js
+Go to http://localhost:3000
+
+
+
+
+
+
+
+
+Each time you refresh the tab, the count will go up.
+------------Summary-------------
+Uses session to track each user's visit count.
+Demonstrates how to solve statelessness with express-session.
+No login or complex structure — just refresh and count!
+
+
+
