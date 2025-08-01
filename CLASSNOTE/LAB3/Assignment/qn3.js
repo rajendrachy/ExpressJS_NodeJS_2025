@@ -12,17 +12,21 @@
 
 
 
-
-
 const fs = require('fs');
-const path = require('path');
 
-const folderPath = './documents';
 
-if(!fs.existsSync(folderPath)) {
-      console.log("Folder not found");
-      process.exit(1);
-}
+
+
+
+// const fs = require('fs');
+// const path = require('path');
+
+// const folderPath = './documents';
+
+// if(!fs.existsSync(folderPath)) {
+//       console.log("Folder not found");
+//       process.exit(1);
+// }
 
 // fs.readdir(__dirname + '/documents', (err, data) => {
 //   if(!err) {
@@ -30,21 +34,21 @@ if(!fs.existsSync(folderPath)) {
 //   }
 // })
 
-fs.readdir(folderPath, (err, data) => {
-  if(!err) {
-    data.forEach((val) => {
-      const itemPath = __dirname + '/documents' + '/' + val;
-     //const itemPath = folderPath + '/' + val;
+// fs.readdir(folderPath, (err, data) => {
+//   if(!err) {
+//     data.forEach((val) => {
+//       //const itemPath = __dirname + '/documents' + '/' + val;
+//      const itemPath = folderPath + '/' + val;
      
-      if(fs.statSync(itemPath).isFile()) {
-            console.log(val);
-      }
-    })
-  } else {
-    console.log(err.message);
+//       if(fs.statSync(itemPath).isFile()) {
+//             console.log(val);
+//       }
+//     })
+//   } else {
+//     console.log(err.message);
 
-  }
-})
+//   }
+// })
 
 
 
