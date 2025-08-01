@@ -12,7 +12,40 @@
 
 
 
-const fs = require('fs');
+// const fs = require('fs');
+// const path = require('path');
+
+// const folderPath = path.join(__dirname + '/documents');
+
+// console.log("The folder path is" ,folderPath);
+// console.log("The dir nameis" , __dirname) // upto assignment
+// console.log("The file name is", __filename) // upto qn3.js
+
+
+
+
+// if(!fs.existsSync(folderPath)) {
+//   console.log("Folder not found");
+//   process.exit(1);
+// }
+
+
+// fs.readdir(folderPath, (err, data) => {
+//        if(!err) {
+//         console.log(data);
+
+//         data.forEach((item) => {
+//           const itemPath = folderPath + "/" + item;
+//              console.log("The item path is", itemPath);
+
+//           if(fs.statSync(itemPath).isFile()) {
+//               console.log(item);
+//           }
+//         })
+//        }
+// })
+
+
 
 
 
@@ -85,69 +118,6 @@ const fs = require('fs');
 //     console.log('Error reading the folder:', err.message); // Show error
 //   }
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//--practice----
-// const fs = require('fs');
-// const foldePath = './documents';
-
-
-// if(!fs.existsSync(foldePath)) {
-//   console.log("Folder not found");
-//   process.exit(1);
-// }
-
-
-
-// fs.readdir(foldePath, (err, data) => {
-//       if(!err) {
-//         console.log("Folder Found in documents: ");
-//         console.log(data);
-
-//         data.forEach(val => {
-//           const itemPath = foldePath + '/' + val;
-
-//           if(fs.statSync(itemPath).isFile()) {
-//             console.log(val);
-//           }
-//         })
-
-//       }  else {
-//         console.log("Error Occurs ");
-//       }
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

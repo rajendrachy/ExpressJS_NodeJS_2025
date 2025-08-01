@@ -14,42 +14,88 @@
 // 3.	Copy only files that end with .txt
 // 4.	Print a success message for each file copied
 
-
 const fs = require('fs');
+const path = require('path');
 
 const sourceDir = './myNotes';
-const destDir = './backupsNotes';
+const destDir = './backupNotes';
 
 if(!fs.existsSync(sourceDir)) {
-  console.log("Folder not found create folder first");
+  console.log("File not found");
   process.exit(1);
+
+
 }
+
 
 if(!fs.existsSync(destDir)) {
-  fs.mkdirSync(destDir, {resursive: true});
+    fs.mkdirSync(destDir, {recursive : true});
 }
 
+fs.readdir(__dirname + '/myNotes', (err, data) => {
+      if(!err) {
+        console.log(data);
+        data.forEach((val)=> {
+          const itemPath = __dirname + '/myNotes' + '/' + val;
 
-fs.readdir(sourceDir, (err, data) => {
-  if(!err) {
-    console.log(data);
-
-    data.forEach(val => {
-      const itemPath = sourceDir + '/' + val;
-      
-      if(fs.statSync(itemPath).isFile() && val.endsWith('.txt')) {
-            console.log(val);
-            const destPath = destDir + '/' + val;
-
-            fs.copyFile(itemPath, destPath, (err) => {
-              if(!err) {
-                console.log("File copy successfully");
-              }
-            })
+            if(fs.statSync(itemPath).isFile() && val.endsWith('.txt')) {
+                const destPath = __dirname + '/backupNotes' + '/' + val;
+                
+                console.log(val);
+               
+                fs.copyFile(itemPath, destPath, (err) => {
+                  if(!err) {
+                    console.log("File .txt copy successful!");
+                  }
+                })
+            }
+        })
       }
-    })
-  }
 })
+
+
+
+
+
+
+
+
+// const fs = require('fs');
+
+// const sourceDir = './myNotes';
+// const destDir = './backupsNotes';
+
+// if(!fs.existsSync(sourceDir)) {
+//   console.log("Folder not found create folder first");
+//   process.exit(1);
+// }
+
+// if(!fs.existsSync(destDir)) {
+//   fs.mkdirSync(destDir, {resursive: true});
+// }
+
+
+// fs.readdir(sourceDir, (err, data) => {
+//   if(!err) {
+//     console.log(data);
+
+//     data.forEach(val => {
+//       const itemPath = sourceDir + '/' + val;
+      
+//       if(fs.statSync(itemPath).isFile() && val.endsWith('.txt')) {
+//             console.log(val);
+//             const destPath = destDir + '/' + val;
+
+//             fs.copyFile(itemPath, destPath, (err) => {
+//               if(!err) {
+//                 console.log("File copy successfully");
+//               }
+//             })
+//       }
+//     })
+//   }
+// })
+
 
 
 
@@ -101,78 +147,6 @@ fs.readdir(sourceDir, (err, data) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//---practice-------
-
-// const fs = require('fs');
-
-// const sourceDir = './myNotes';
-// const destDir = './backupsNotes';
-
-
-// if(!fs.existsSync(sourceDir)) {
-//   console.log("Source folder not found");
-//   process.exit(1); // // exit with error code 1
-// }
-
-
-// if(!fs.existsSync(destDir)) {
-//   fs.mkdirSync(destDir, {recursive : true});
-// }
-
-
-// fs.readdir(sourceDir, (err, data) => {
-//   if(!err) {
-//     console.log(".txt files found");
-//     console.log(data);
-
-//     data.forEach(val => {
-//       console.log(val);
-
-//       const itemPath = sourceDir + '/' + val;
-//       // console.log(`The itemPath is ${itemPath}`)
-
-
-//       if(fs.statSync(itemPath).isFile() && val.endsWith('.txt')) {
-//         const destPath = destDir + '/' + val;
-           
-
-//         fs.copyFile(itemPath, destPath, (err) => {
-//           console.log(`File copy ${val}`);
-//         })
-//       }
-//     })
-
-//   } else {
-//     console.log("Error Occurs: ");
-//   }
-// })
 
 
 
