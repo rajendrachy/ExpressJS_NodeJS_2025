@@ -1,13 +1,18 @@
 // // app.js (Synchronous version)
-// const fs = require('fs');
+const fs = require('fs');
 
-// // Read file
-// const data = fs.readFileSync('secE.txt', 'utf8');
-// console.log('Before:', data);
+// Read file
+const data = fs.readFileSync('secE.txt', 'utf8');
+console.log('Before:', data);
 
 // // Write new content
-// fs.writeFileSync('secE.txt', data + '\nAdded with sync method.');
-// console.log('Synchronous write done.');
+fs.writeFileSync('secE.txt', data + '\nAdded with sync method.');
+console.log('Synchronous write done.');
+
+
+
+
+
 
 
 
@@ -34,6 +39,7 @@
 //     console.error('Read error:', err);
 //   }
 // });
+
 
 
 

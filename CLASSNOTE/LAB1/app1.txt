@@ -7,3 +7,66 @@ Encoding = the way text is turned into bytes and back.
 'utf8' tells Node.js how to correctly interpret those bytes as human-readable text.
 
 
+
+
+
+ -------------file1.txt--------------
+This is a relative file path — it refers to a file named file1.txt in the current working directory (where your script or terminal is running).
+It's simple and commonly used when you're already in the same directory as the file.
+
+
+ ---------./file1.txt-------------------
+This is also a relative file path, and it means exactly the same thing as file1.txt — it refers to file1.txt in the current directory.
+
+But it’s more explicit because:
+. means "current directory"
+./file1.txt = “in the current directory, access file1.txt”
+
+
+
+
+
+
+
+
+------------------------ Relative Path-------------------------
+A relative path tells you how to get to a file or folder starting from your current location (your current working directory).
+
+....Example:......
+Suppose you have this folder structure:
+project/
+├── app.js
+└── data/
+    └── file.txt
+And you're running app.js from inside the project/ folder.
+
+---------Then this is a relative path:-------------
+const data = fs.readFileSync('./data/file.txt', 'utf8');
+./ means "start from the current directory"
+
+So ./data/file.txt means:
+→ go into the data folder
+→ open file.txt
+-------------Works only if your current directory is correct.-----------
+
+
+
+
+
+----------------Absolute Path---------------------
+An absolute path gives the full address to a file or folder, starting from the root of the file system (on Unix-like systems) or drive letter (on Windows).
+
+Example (Unix/macOS):
+const data = fs.readFileSync('/Users/yourname/project/data/file.txt', 'utf8');
+
+
+
+Example (Windows):
+const data = fs.readFileSync('C:\\Users\\yourname\\project\\data\\file.txt', 'utf8');
+Doesn't depend on where you run your script.
+
+Always points to the same file.
+
+
+
+
