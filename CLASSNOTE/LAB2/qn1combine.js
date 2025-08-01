@@ -5,27 +5,31 @@
 // Without 'utf8', you’d get raw Buffer data.
 
 
-const fs = require('fs');
 
-fs.readFile('./file1.txt', 'utf-8' , (err1, data1) => {
-         if(!err1) {
-          console.log(`The data1 is : ${data1}`);
+// const fs = require('fs');
 
-        fs.readFile('./file2.txt', 'utf-8', (err2, data2) => {
-          if(!err2) {
-            console.log(`The data2 is : ${data2}`);
+// fs.readFile('./file1.txt', 'utf-8' , (err1, data1) => {
+//          if(!err1) {
+//           console.log(`The data1 is : ${data1}`);
 
-              const combine = `${data1}\n${data2}`;
+//         fs.readFile('./file2.txt', 'utf-8', (err2, data2) => {
+//           if(!err2) {
+//             console.log(`The data2 is : ${data2}`);
 
-              fs.writeFile('combine.txt', combine, 'utf-8', (err3) => {
-                 if(!err3) {
-                  console.log("File added Successfully");
-                 }
-              })
-          }
-        })
-      }
-})
+//               const combine = `${data1}\n${data2}`;
+
+//               fs.writeFile('combine.txt', combine, 'utf-8', (err3) => {
+//                  if(!err3) {
+//                   console.log("File added Successfully");
+//                  }
+//               })
+//           }
+//         })
+//       }
+// })
+
+
+
 
 
 
@@ -58,5 +62,10 @@ fs.readFile('./file1.txt', 'utf-8' , (err1, data1) => {
 // }
 
 // combineFiles();
+
+
+
+
+
 
 

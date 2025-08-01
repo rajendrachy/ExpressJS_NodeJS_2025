@@ -54,21 +54,21 @@
 
 
 
-const fs = require('fs');
+// const fs = require('fs');
 
-function logActivity() {
-    const now = new Date();
-    const timestamp = now.toISOString().replace('T', ' ').split('.')[0];
+// function logActivity() {
+//     const now = new Date();
+//     const timestamp = now.toISOString().replace('T', ' ').split('.')[0];
 
-    const mess = `Log activity at ${timestamp} \n`;
+//     const mess = `Log activity at ${timestamp} \n`;
 
-    fs.appendFile('acti.log', mess, (err)=> {
-      if(!err) {
-        console.log('Logged:', mess.trim());
-      }
-    })
-}
+//     fs.appendFile('acti.log', mess, (err)=> {
+//       if(!err) {
+//         console.log('Logged:', mess.trim());
+//       }
+//     })
+// }
 
 
-logActivity();
-setInterval(logActivity, 12000); // Log every 12 seconds
+// logActivity();
+// setInterval(logActivity, 12000); // Log every 12 seconds
