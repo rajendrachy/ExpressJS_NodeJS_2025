@@ -1,0 +1,9 @@
+Without using utf8 we get => buffer
+=> The 'utf8' argument specifies the character encoding to be used when reading the file.
+
+In computing, encoding refers to how characters (like letters, numbers, symbols) are represented as bytes (0s and 1s) so that they can be stored in a file or transmitted over the internet.
+
+Encoding = the way text is turned into bytes and back.
+'utf8' tells Node.js how to correctly interpret those bytes as human-readable text.
+
+
