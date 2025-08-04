@@ -1,0 +1,48 @@
+-------------- Why JSON.parse(data)?---------------------
+When you read from data.json:
+
+fs.readFile('./data.json', 'utf-8', (err, data) => {
+    // data is a STRING like: '[{"username":"abc", "password":"123"}]'
+    arr = JSON.parse(data);  // ⬅️ Convert string to JavaScript array
+});
+fs.readFile returns the file content as a string.
+
+
+
+
+
+But you want to work with it as an array or object in JS.
+
+
+So you use JSON.parse() to convert the string into a real JavaScript array:
+'[{"username":"abc"}]'  ➡️   [{ username: 'abc' }]
+
+
+
+
+
+
+
+
+
+--------------------- Why JSON.stringify(arr)?----------------------
+When writing to the file:
+
+fs.writeFile('./data.json', JSON.stringify(arr), ...);
+fs.writeFile expects a string.
+
+
+
+Your arr is a JavaScript array, not a string.
+
+So you use JSON.stringify() to convert it to a JSON string:
+[{ username: 'abc' }]  ➡️  '[{"username":"abc"}]'
+
+
+
+
+----------------- Summary--------------------------
+Operation	Why it's needed
+JSON.parse(data)	Convert file string → JS object/array
+JSON.stringify()	Convert JS object/array → file string (JSON)
+
