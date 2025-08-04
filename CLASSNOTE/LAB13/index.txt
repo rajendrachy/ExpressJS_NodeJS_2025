@@ -1,0 +1,32 @@
+---------------------Short Note on req.params in Express-------------------
+req.params is used to access route parameters from the URL.
+
+
+
+Route parameters are defined using a colon : in the route path.
+----------- Syntax:---------------
+
+app.get('/user/:id', (req, res) => {
+  res.send(req.params.id);
+});
+
+
+
+-----------------Example:---------------------
+URL: /user/42
+Route: /user/:id
+Result: req.params → { id: '42' }
+
+
+
+
+--------------------Use Cases:-----------------------
+Fetch user by ID: /user/:id
+View product details: /product/:productId
+Edit article: /article/:slug/edit
+
+---------------------Note:-------------------
+req.params only works with dynamic URL parts (not query strings or body data).
+For query strings, use req.query; for POST body, use req.body.
+
+
