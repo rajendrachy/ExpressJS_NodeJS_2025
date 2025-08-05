@@ -20,6 +20,7 @@ Result: req.params → { id: '42' }
 
 
 
+
 --------------------Use Cases:-----------------------
 Fetch user by ID: /user/:id
 View product details: /product/:productId
@@ -28,5 +29,8 @@ Edit article: /article/:slug/edit
 ---------------------Note:-------------------
 req.params only works with dynamic URL parts (not query strings or body data).
 For query strings, use req.query; for POST body, use req.body.
+
+
+
 
 
