@@ -1,0 +1,33 @@
+-------------------In Express.js, the line:------------------
+app.use(express.urlencoded({ extended: true }));
+is used to parse incoming requests with URL-encoded payloads, such as form submissions.
+
+
+
+
+-------------- Why extended: true?--------------------
+The extended option determines how the URL-encoded data is parsed.
+
+extended: false → Uses the querystring library (built-in)
+
+extended: true → Uses the qs library (a more powerful library)
+
+
+
+
+
+
+------------------What’s the difference?-----------------------
+Option	                   Library Used	                    Can Parse Nested Objects?	                  Example
+false                    	querystring	                          ❌ No	                     { user: '[object Object]' }
+true	                       qs	                               ✔️ Yes	                       { user: { name: 'Alice' } }
+
+
+
+✔️ Allows for nested object parsing
+
+
+
+
+
+

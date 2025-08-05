@@ -1,0 +1,50 @@
+-------------- Express.js App Flow – Quick Notes--------------------
+1.Import Modules
+express for server
+path for handling file paths
+baseRoute for routing
+
+
+
+2.Initialize Express App
+const app = express();
+
+
+
+
+3.Middleware Setup
+express.urlencoded({ extended: true }): Parses form data (useful for POST requests)
+
+
+
+
+4.Routing
+app.use("/", baseRoute);: All routes start from /, handled in baseRoute
+
+
+
+
+5.Inside baseRoute (Router File):
+Handles GET request to /
+Sends index.html file using res.sendFile()
+
+
+
+
+6.Start Server
+App listens on port 3000
+Message shown in console on success
+
+
+
+
+--------------File Structure Summary----------------------
+LAB12/
+│
+├── index.html
+├── server.js              ← main app
+└── routes/
+    └── baseRoute.js       ← route handler
+
+
+
