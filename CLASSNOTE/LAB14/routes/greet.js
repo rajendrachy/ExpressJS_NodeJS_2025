@@ -1,14 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/greet', (req, res) => {
-  const lang = req.query.lang;
 
+router.get('/', (req, res) => {
+   res.send("Home page of Greeting");
+
+})
+
+
+
+router.get('/gree', (req, res) => {
+  const lan = req.query.lan;
+  console.log("first", lan);
   let message;
 
-  switch (lang) {
+
+  switch (lan) {
     case 'en':
       message = 'Hello';
+      //console.log("second", lang.message);
       break;
     case 'fr':
       message = 'Bonjour';
@@ -23,7 +33,12 @@ router.get('/greet', (req, res) => {
   res.send(message);
 });
 
+
 module.exports = router;
+
+
+
+
 
 
 
