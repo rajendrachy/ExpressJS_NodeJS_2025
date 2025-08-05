@@ -1,0 +1,6 @@
+ ----------Explanation:----------
+new Date() creates a new Date object representing the current date and time on the server.
+
+.getHours() returns the hour part of that time in 24-hour format (0 to 23).
+
+
