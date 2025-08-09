@@ -49,6 +49,104 @@
 
 
 
+//-----------------according to the above question-------------------
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const url = require('url');
+const querystring = require('querystring');
+const { add, sub, mul, div } = require('./calculate');
+
+const server = http.createServer((req, res) => {
+
+    // Serve index.html
+    if (req.url === '/root' && req.method === 'GET') {
+        fs.readFile(path.join(__dirname, 'public', 'index.html'), (err, data) => {
+            if (err) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end('Server Error');
+            } else {
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.end(data);
+            }
+        });
+    }
+
+    // ADD (GET)
+    else if (req.url.startsWith('/add') && req.method === 'GET') {
+        const query = url.parse(req.url, true).query;
+        const a = parseFloat(query.num1);
+        const b = parseFloat(query.num2);
+
+        if (isNaN(a) || isNaN(b)) {
+            res.end('Error: Invalid input.');
+        } else {
+            res.end(`Result: ${add(a, b)}`);
+        }
+    }
+
+    // SUB (GET)
+    else if (req.url.startsWith('/sub') && req.method === 'GET') {
+        const query = url.parse(req.url, true).query;
+        const a = parseFloat(query.num1);
+        const b = parseFloat(query.num2);
+
+        if (isNaN(a) || isNaN(b)) {
+            res.end('Error: Invalid input.');
+        } else {
+            res.end(`Result: ${sub(a, b)}`);
+        }
+    }
+
+    // MUL (POST)
+    else if (req.url === '/mul' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => { body += chunk.toString(); });
+        req.on('end', () => {
+            const data = querystring.parse(body);
+            const a = parseFloat(data.num1);
+            const b = parseFloat(data.num2);
+
+            if (isNaN(a) || isNaN(b)) {
+                res.end('Error: Invalid input.');
+            } else {
+                res.end(`Result: ${mul(a, b)}`);
+            }
+        });
+    }
+
+    // DIV (POST)
+    else if (req.url === '/div' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => { body += chunk.toString(); });
+        req.on('end', () => {
+            const data = querystring.parse(body);
+            const a = parseFloat(data.num1);
+            const b = parseFloat(data.num2);
+
+            if (isNaN(a) || isNaN(b)) {
+                res.end('Error: Invalid input.');
+            } else if (b === 0) {
+                res.end('Error: Cannot divide by zero.');
+            } else {
+                res.end(`Result: ${div(a, b)}`);
+            }
+        });
+    }
+
+    // Not found
+    else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Not Found');
+    }
+});
+
+server.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+});
+
+
+
 
 
 
@@ -102,6 +200,9 @@
 // app.listen(3000, () => {
 //   console.log('Server running at http://localhost:3000');
 // });
+
+
+
 
 
 
