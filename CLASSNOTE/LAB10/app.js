@@ -3,17 +3,25 @@
 // const path = require('path');
 
 
+
 // const app = express();
 // const PORT = 3000;
 
-// // Middleware to parse form data
+
+
+
+// //------ Middleware to parse form data ----FORM_DATA_PARSE------
 // app.use(express.urlencoded({ extended: false }));
 
 
-// // GET route to serve login.html
+
+
+// // GET route to serve => login.html
 // app.get('/login', (req, res) => {
 //     res.sendFile(path.join(__dirname , 'login.html'));
 // });
+
+
 
 
 
@@ -40,6 +48,10 @@
 //     });
 // });
 
+
+
+
+
 // // Start server
 // app.listen(PORT, () => {
 //     console.log(`Server running at http://localhost:${PORT}`);
@@ -51,6 +63,9 @@
 
 
 
+
+
+//-----------Practicing--------------------------
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -61,43 +76,41 @@ const app = express();
 app.use(express.urlencoded());
 
 app.get('/', (req, res) => {
-       res.send("Hello Home page");
+    res.send("This is homePage");
 })
 
 app.get('/log', (req, res) => {
-    res.sendFile(path.join(__dirname, './login.html'));
+    res.sendFile(path.join(__dirname, 'login.html'));
 })
+
 
 
 app.post('/login', (req, res) => {
-      console.log(req.body);
-  let arr = [];
+ let arr = [];
 
-      fs.readFile('./data.json', 'utf-8', (err, data) => {
-        console.log("The data are", data);
+ fs.readFile('./data.json', 'utf-8', (err, data) => {
+          if(!err && data.length != 0) {
+            console.log(data);
 
-              if(!err && data.length != 0) {
-                  arr = data ;
-              }
+            arr = JSON.parse(data);
+            console.log(arr);
+          }
+          arr.push(req.body);
+       
+          console.log("The req.body is", req.body);
 
-              arr.push(req.body);
+            fs.writeFile('./data.json', JSON.stringify(arr), (err) => {
+         console.log("save success");
+            } )
 
-              fs.writeFile('./data.json', JSON.stringify(arr), (err) => {
-                 if(!err) {
-                    res.send("success");
-                 } else {
-                    res.status(500).send("Internal server error");
-                 }
-              })
-      })
+          
+ })
 })
-
 
 
 
 app.listen(3000, () => {
-    console.log("Server started.....");
+    console.log(`Server stsrted : http://localhost:3000`);
 })
-
 
 
