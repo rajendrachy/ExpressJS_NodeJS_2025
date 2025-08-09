@@ -14,6 +14,7 @@ Sample Data in products.json
     { "id": 7, "name": "Jacket", "category": "clothing", "price": 3000 },
     { "id": 8, "name": "Refrigerator", "category": "appliances", "price": 25000 }
 ]
+
 Task
 Write an Express.js API route to:
 1.	Filter and return products from the JSON file based on the categoryName, which will be passed as a dynamic route parameter.
@@ -26,5 +27,12 @@ It should return all products in the electronics category.
 •	If the user makes a request like:
 •	GET /products/category/clothing?maxPrice=2000
 It should return all products in the clothing category where the price is less than or equal to 2000.
+
+
+
+
+
+
+
 
 
