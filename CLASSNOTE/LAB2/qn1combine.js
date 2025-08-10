@@ -51,6 +51,7 @@
 //     const data2 = await fs.readFile('./file2.txt', 'utf-8');
 //     console.log(`The data2 is : ${data2}`);
 
+
 //     const combined = `${data1}\n${data2}`;
 
 //     await fs.writeFile('combine.txt', combined, 'utf-8');
