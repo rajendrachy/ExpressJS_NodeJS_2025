@@ -1,0 +1,91 @@
+-----------Code in question----------
+const query = url.parse(req.url, true).query;
+
+
+
+const a = parseFloat(query.num1);
+const b = parseFloat(query.num2);
+
+
+
+1. What’s happening here
+req.url → Contains the full URL path the client requested, e.g.
+"/add?num1=5&num2=4"
+
+
+
+
+
+---------url.parse(req.url, true)---------------
+This uses Node’s built-in url module.
+
+It splits the URL into parts.
+The second argument true tells Node to parse the query string into an object.
+.query
+
+
+
+This extracts only the query parameters part (everything after ?) in object form.
+
+Example:
+If the URL is:
+/add?num1=5&num2=4
+then:
+query = { num1: '5', num2: '4' }
+
+
+
+
+
+
+
+
+2. Why parseFloat is needed
+Query parameters always come in as strings, even if they look like numbers.
+parseFloat() converts them into actual numbers so math can be done.
+
+Example:
+parseFloat('5')   // 5 (number)
+parseFloat('4.2') // 4.2 (number)
+
+
+
+
+
+
+3. Step-by-step flow
+Client request
+http://localhost:3000/add?num1=5&num2=4
+req.url
+→ "/add?num1=5&num2=4"
+
+url.parse(..., true)
+→ { pathname: '/add', query: { num1: '5', num2: '4' }, ... }
+
+.query
+→ { num1: '5', num2: '4' }
+
+
+
+
+
+parseFloat(query.num1)
+→ 5
+
+parseFloat(query.num2)
+→ 4
+
+
+
+
+
+
+
+
+4. Common mistakes to avoid
+=> Forgetting true in url.parse → You’ll get the query string as one long string ("num1=5&num2=4") instead of an object.
+👍 Always check if the value exists before parsing to avoid NaN.
+
+
+
+
