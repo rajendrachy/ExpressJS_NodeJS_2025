@@ -18,11 +18,27 @@ app.use('/morning', morningRoute);
 app.use('/evening', eveningRoute);
 
 // 404 Handler
-app.use((req, res) => {
-  res.status(404).send('404 Not Found');
-});
+// app.use((req, res) => {
+//   res.status(404).send('404 Not Found');
+// });
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
