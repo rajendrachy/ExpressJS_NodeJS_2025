@@ -24,64 +24,28 @@
 
 
 
-const fs = require('fs');
-fs.readFile('file1.txt', 'utf-8', (err1, data1) => {
-  if(!err1){
-   console.log(data1);
-   fs.readFile('file2.txt', 'utf-8', (err2, data2) => {
-    if(!err2) {
-      console.log(data2);
 
-       const com = `${data1} \n ${data2}`;
-
-       fs.writeFile('combine.txt', com, (err3) => {
-        if(!err3) {
-          console.log("File write successfully");
-        }
-       })
-    }
-   })
-  }
-  
-})
-
-
-
-
-
-
-
-
+//----------------appendFile()-----------------------
 // const fs = require('fs');
-
-// fs.readFile('file1.txt', 'utf-8', (err,data1) => {
-//   if(!err) {
-//     console.log(data1);
-
-//     fs.readFile('file2.txt', 'utf-8', (err, data2) => {
-//       if(!err) {
-//         console.log(data2);
-
-//         const combineData = `${data1}\n${data2}`;
-// fs.writeFile('data3.txt', combineData, 'utf-8', (err) => {
-//   if(!err) {
-//     console.log('Files combime successfully');
+// fs.readFile('file1.txt', 'utf-8', (err1, data1) => {
+//   if(!err1) {
+//         console.log(data1);
+        
 //   }
-// })
+//   fs.readFile('file2.txt', 'utf-8', (err2, data2) => {
+//     if(!err2) {
+//       console.log(data2);
+//     }
 
-//       } else {
-//         console.log('Error');
+//     const combineData = `${data1} \n ${data2}`;
+
+//     fs.appendFile('data3.txt', combineData, 'utf-8', (err3) => {
+//       if(!err3) {
+//         console.log("Success");
 //       }
 //     })
-//   } else {
-//     console.log('Error reading file1:', err);
-//   }
+//   })
 // })
-
-
-
-
-
 
 
 
