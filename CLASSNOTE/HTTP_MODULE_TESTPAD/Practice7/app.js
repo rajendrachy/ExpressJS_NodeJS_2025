@@ -10,19 +10,19 @@ const app = express();
 
 app.get('/movies', (req, res) => {
    res.sendFile(path.join(__dirname, 'movie.json'));
-
+   
    let gener = req.query;
-   console.log(gener);
+   console.log("The gener is: ", gener);
 
-let year = req.query;
+   let year = req.query;
 
-
-  // console.log(movie);
+  console.log(movie);
    
 
-  let movi = movie.filter(val => val.genre == gener.gener && val.year == year.year);
+  let movi = movie.filter(val => val.genre == gener.gener || val.year == year.year);
 
-console.log(movi);
+
+console.log("The response movies are : ", movi);
 res.send(movi);
 
 })
@@ -33,6 +33,7 @@ app.listen(3000, () => {
   console.log("Server started");
 
 })
+
 
 
 
