@@ -1,0 +1,4 @@
+npm install -g n => install node.js latest version
+globally
+
+
