@@ -6,7 +6,7 @@ const app = express();
 
 //app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
-app.use(express.static(path.join(__dirname, 'public'), {extensions: ['html']}));
+app.use(express.static(path.join(__dirname, 'pages'), {extensions: ['html']}));
 
 
 // app.get('/about', (req, res) => {
