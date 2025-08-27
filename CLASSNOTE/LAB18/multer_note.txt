@@ -1,0 +1,128 @@
+
+---------- You want a clear note of all multer functions for handling file uploads (.single(), .array(), .fields(), .none(), .any() etc.) and how they behave.------------------------
+Here’s a well-structured cheat sheet 👇
+------------ Multer Functions Cheat Sheet----------------
+
+
+
+
+
+
+
+------------1. .single(fieldname)---------------
+
+Uploads only 1 file with the given field name.
+Stores file info in req.file.
+
+----------Example:---------
+app.post('/upload', upload.single('avatar'), (req, res) => {
+    console.log(req.file);   // Single file object
+    res.send('Single file uploaded!');
+});
+
+
+----------Form field:---------------
+<input type="file" name="avatar">
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------2. .array(fieldname, maxCount)--------------------
+Uploads multiple files with the same field name.
+Stores files in req.files (array of objects).
+
+-------------Example:-----------------
+app.post('/upload', upload.array('photos', 5), (req, res) => {
+    console.log(req.files);  // Array of file objects
+    res.send('Multiple files uploaded!');
+});
+
+
+----- Form field:-------------
+<input type="file" name="photos" multiple>
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------3. .fields(fieldsArray)--------------------
+
+Uploads files from different input fields.
+Expects an array of objects with name and maxCount.
+
+Stores files in req.files (object with arrays by field name).
+
+--------Example:-------------
+app.post('/upload', upload.fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'gallery', maxCount: 5 }
+]), (req, res) => {
+    console.log(req.files.avatar[0]);   // Single file
+    console.log(req.files.gallery);     // Array of files
+    res.send('Files uploaded from multiple fields!');
+});
+
+
+----------- Form fields:------------
+<input type="file" name="avatar">
+<input type="file" name="gallery" multiple>
+
+
+
+
+
+
+
+
+
+---------------4. .none()--------------------
+Accepts only text fields (no files).
+Useful when you want to parse form data but not allow uploads.
+
+-----------Example:-------------
+app.post('/profile', upload.none(), (req, res) => {
+    console.log(req.body);   // Only form text data
+    res.send('No files allowed, only text data!');
+});
+
+
+
+
+
+
+
+-----------------5. .any()----------------
+Accepts any number of files from any field.
+Stores files in req.files (array).
+
+⚠️ Not recommended for production (less control).
+
+--------------Example:--------------
+app.post('/upload', upload.any(), (req, res) => {
+    console.log(req.files);  // Array of files from all fields
+    res.send('Any files uploaded!');
+});
+
+
+
+
+
+
+
