@@ -18,7 +18,19 @@ app.post('/upload',upload.array("test-upload", 2), (req, res)=>{
 
 
 app.listen(3000, (req,res)=>{
-     console.log("Server Stsrted");
+     console.log("Server Started");
 })
+
+
+
+
+
+
+
+
+
+
+
+
 
 
