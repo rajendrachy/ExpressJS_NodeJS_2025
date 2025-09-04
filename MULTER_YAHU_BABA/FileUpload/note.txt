@@ -1,0 +1,93 @@
+---------------📒 Multer Upload Types-----------------
+-------1. Single File Upload-----------
+Uploads only one file with the given field name.
+Saves file info in req.file.
+
+app.post("/upload", upload.single('avatar'), (req, res) => {
+  console.log(req.file); // file object
+  res.send("Single file uploaded");
+});
+
+👉 upload.single(fieldname)
+
+
+
+
+
+
+----------------2. Multiple Files Upload (Same Field)-------------
+Uploads multiple files with the same input field name.
+
+Saves files info in req.files.
+
+app.post("/upload", upload.array('photos', 5), (req, res) => {
+  console.log(req.files); // array of files
+  res.send("Multiple files uploaded");
+});
+👉 upload.array(fieldname, maxCount)
+
+
+
+
+
+
+
+
+----------3. Multiple Fields Upload--------------
+Uploads files from different field names in the same form.
+
+Saves files info in req.files as an object (key = fieldname, value = array of files).
+
+app.post("/upload", upload.fields([
+  { name: 'avatar', maxCount: 1 },
+  { name: 'gallery', maxCount: 8 }
+]), (req, res) => {
+  console.log(req.files.avatar);   // single file
+  console.log(req.files.gallery); // multiple files
+  res.send("Multiple fields uploaded");
+});
+
+👉 upload.fields([{ name, maxCount }, …])
+
+
+
+
+
+
+
+
+
+----------4. No File Upload (Text Only)------------
+
+Accepts only form fields (no files).
+
+Files will be rejected.
+Useful for validating that no file is uploaded.
+
+app.post("/upload", upload.none(), (req, res) => {
+  console.log(req.body); // only text fields
+  res.send("Only text fields accepted");
+});
+👉 upload.none()
+
+
+
+
+
+
+
+
+-----------5. Any File Upload-----------
+Accepts files from any field name.
+Stores them in req.files (array).
+
+No limit to field names, but you can set limits.
+
+app.post("/upload", upload.any(), (req, res) => {
+  console.log(req.files); // all uploaded files
+  res.send("Any files uploaded");
+});
+👉 upload.any()
+
+
+
