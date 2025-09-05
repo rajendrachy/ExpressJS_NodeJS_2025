@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login page</h1>
+
+  <form action="/login" method="post">
+     Name: <input type="text" name="username"><br><br>
+     Password: <input type="text" name="password"><br><br>
+     <button>Submit</button>
+  </form>
+
+  <p id="expiredMsg" style="color:red;"></p>
+
+<script>
+  window.onload = function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("expired")) {
+      document.getElementById("expiredMsg").textContent =
+        "Your session has expired. Please login again.";
+    }
+  }
+</script>
+
+</body>
+</html>
