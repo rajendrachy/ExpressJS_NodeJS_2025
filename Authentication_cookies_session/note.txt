@@ -1,0 +1,33 @@
+----------HTTP is Stateless & Sessions----------
+HTTP is stateless → Each request is independent, server does not remember previous requests.
+
+Problem: Without memory, things like login, shopping cart, user tracking are not possible.
+
+
+
+
+-------------Session-------------
+A session stores user data on the server to make HTTP stateful.
+
+--------Process:--------
+User logs in → Server creates session ID.
+Session ID is sent to client (usually in a cookie).
+Client sends session ID with every request.
+Server retrieves user data from session storage.
+
+
+
+
+----------Benefits-----------
+Maintains login state.
+Tracks shopping cart / user activity.
+Secure (data stays on server).
+
+
+
+---------- In short:--------------
+HTTP = stateless
+Session = makes it stateful by storing user info on server and using session ID.
+
+
+
