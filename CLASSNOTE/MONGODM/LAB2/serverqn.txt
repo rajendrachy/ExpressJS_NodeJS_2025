@@ -1,0 +1,62 @@
+1. Database Setup
+
+Create a database CompanyDB.
+
+Create two collections:
+
+employees → fields:
+empid (Number, unique)
+name (String)
+salary (Number)
+deptid (Number)
+
+
+
+departments → fields:
+deptid (Number, unique)
+deptname (String)
+
+
+2. Routes
+(A) Employee Routes
+/seed-employees → Insert at least 6 sample employees into the employees collection.
+/view-employees → Display all employees.
+
+/add-employee/:id/:name/:salary/:deptid → Add a single employee using URL parameters.
+
+
+
+/delete-employee/:id → Delete an employee with the given empid.
+
+
+
+/delete-employee-lt/:id → Delete all employees whose empid is less than the given id.
+
+
+/update-salary/:id/:amount → Update the salary of an employee with the given empid.
+
+/update-salary-range/:id/:amount → Increase salary of all employees with empid greater than or equal to given id.
+
+/search-employee/:name → Find employees by name.
+
+
+
+
+
+
+
+
+(B) Department Routes
+
+/seed-departments → Insert at least 3 sample departments into the departments collection.
+
+/view-departments → Display all departments.
+
+/add-department/:id/:name → Add a new department.
+
+/delete-department/:id → Delete a department.
+
+/update-department/:id/:newname → Update department name.
+
+
+
