@@ -1,0 +1,23 @@
+What does it mean?
+saveUninitialized: true
+→ A new empty session will be created and saved in the store even if you don’t set any data in the session.
+⚠️ This can cause lots of empty sessions stored in your memory/DB.
+
+saveUninitialized: false
+→ A session is not saved until something is actually stored in req.session.
+✅ Recommended in most cases (saves resources, avoids GDPR/tracking issues).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
