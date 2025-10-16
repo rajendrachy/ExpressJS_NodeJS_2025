@@ -1,7 +1,9 @@
 ---------------📒 Multer Upload Types-----------------
 -------1. Single File Upload-----------
-Uploads only one file with the given field name.
+- Uploads only one file with the given field name.
 Saves file info in req.file.
+
+
 
 app.post("/upload", upload.single('avatar'), (req, res) => {
   console.log(req.file); // file object
@@ -15,10 +17,15 @@ app.post("/upload", upload.single('avatar'), (req, res) => {
 
 
 
-----------------2. Multiple Files Upload (Same Field)-------------
-Uploads multiple files with the same input field name.
 
-Saves files info in req.files.
+
+
+
+
+----------------2. Multiple Files Upload (Same Field)-------------
+- Uploads multiple files with the same input field name.
+
+- Saves files info in req.files.
 
 app.post("/upload", upload.array('photos', 5), (req, res) => {
   console.log(req.files); // array of files
@@ -57,6 +64,7 @@ app.post("/upload", upload.fields([
 
 
 
+
 ----------4. No File Upload (Text Only)------------
 
 Accepts only form fields (no files).
@@ -77,6 +85,7 @@ app.post("/upload", upload.none(), (req, res) => {
 
 
 
+
 -----------5. Any File Upload-----------
 Accepts files from any field name.
 Stores them in req.files (array).
@@ -88,6 +97,11 @@ app.post("/upload", upload.any(), (req, res) => {
   res.send("Any files uploaded");
 });
 👉 upload.any()
+
+
+
+
+
 
 
 
