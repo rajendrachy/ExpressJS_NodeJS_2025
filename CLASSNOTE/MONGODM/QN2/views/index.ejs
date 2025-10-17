@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Student details</h1>
+
+<!-- <ul>
+  <% stud.forEach(v=> { %>
+    <li><%= v.name %> — <%= v.section %> — <%= v.marks %></li>
+  <% }) %>
+</ul>
+ -->
+
+
+<table border="1" cellpadding="20px" style="border-collapse: collapse;" >
+  <thead>
+    <th>Name</th>
+    <th>Section</th>
+    <th>Marks</th>
+  </thead>
+
+
+  <tbody>
+   <% stud.forEach(v => { %>
+  <tr>
+    <td><%= v.name %></td>
+    <td><%= v.section %></td>
+    <td><%= v.marks %></td>
+  </tr>
+  <% }) %>
+  </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+
