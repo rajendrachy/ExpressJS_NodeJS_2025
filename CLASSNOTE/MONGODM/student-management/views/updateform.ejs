@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Update form</h1>
+    <form action="/update-student" method="post">
+        <input type="hidden" value="<%= student[0]._id %>" name="id">
+        <input type="text" name="name" value="<%= student[0].name %>">
+        <input type="text" name="section" value="<%= student[0].section %>">
+        <input type="text" name="marks" value="<%= student[0].marks %>">
+        <button>Update Student</button>
+    </form>
+</body>
+</html>
+
+
+
+
