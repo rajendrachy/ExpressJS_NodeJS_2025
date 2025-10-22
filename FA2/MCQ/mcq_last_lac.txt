@@ -1,0 +1,231 @@
+📘 20 MCQs on Client State Management & Sessions
+1. What is client state management?
+A. Managing data on the client’s browser
+B. Managing server logs
+C. Managing database queries
+D. Managing API versions
+✅ Answer: A
+
+
+
+
+2. Which of the following is NOT a client state management technique?
+A. Cookies
+B. Local Storage
+C. Session Variables
+D. Server Logs
+✅ Answer: D
+
+
+
+
+
+3. Client-side state management stores data ______.
+A. In server RAM
+B. In client’s browser
+C. In database tables
+D. In middleware
+✅ Answer: B
+
+
+
+
+
+
+4. Which of the following is a server-side state management technique?
+A. Cookies
+B. ViewState
+C. Session State
+D. LocalStorage
+✅ Answer: C
+
+
+
+
+
+5. What does the express-session module in Express.js do?
+A. Handles HTTP routing
+B. Stores session data on the server
+C. Compresses server responses
+D. Logs requests
+✅ Answer: B
+
+
+
+
+
+
+6. Session data in Express.js is typically stored in:
+A. Browser cache only
+B. Server memory or external storage
+C. Client-side JavaScript variables
+D. Network packets
+✅ Answer: B
+
+
+
+
+
+
+7. Which middleware is required to use sessions in Express?
+A. express.json()
+B. express.urlencoded()
+C. express-session
+D. express.static()
+✅ Answer: C
+
+
+
+
+8. By default, session IDs are stored in the client’s browser as:
+A. A cookie
+B. LocalStorage variable
+C. Encrypted file
+D. Cache object
+✅ Answer: A
+
+
+
+
+
+
+9. In express-session, which property defines how long the session lasts?
+A. saveUninitialized
+B. cookie.maxAge
+C. resave
+D. expiresIn
+✅ Answer: B
+
+
+
+
+
+10. Which of these is a drawback of client-side state management?
+A. Requires extra server memory
+B. Cannot scale across servers
+C. Security risks if data is exposed
+D. Requires a database connection
+✅ Answer: C
+
+
+
+
+
+11. Which method is more secure for storing sensitive information?
+A. Cookies
+B. LocalStorage
+C. Session (server-side)
+D. Query Strings
+✅ Answer: C
+
+
+
+
+
+12. What is the default storage engine of express-session?
+A. Redis
+B. MemoryStore
+C. MongoDB
+D. FileStore
+✅ Answer: B
+
+
+
+
+
+
+13. Why is MemoryStore not recommended for production?
+A. Too fast
+B. Uses too little memory
+C. Not designed for scalability
+D. Lacks encryption
+✅ Answer: C
+
+
+
+
+
+
+14. Which of these is NOT a client-side state management option?
+A. Cookies
+B. LocalStorage
+C. SessionStorage
+D. RedisStore
+✅ Answer: D
+
+
+
+
+
+
+15. What differentiates SessionStorage from LocalStorage in browsers?
+A. SessionStorage persists even after closing browser
+B. LocalStorage is cleared when tab is closed
+C. SessionStorage clears after browser/tab is closed
+D. Both are exactly the same
+✅ Answer: C
+
+
+
+
+
+
+16. Which property in express-session ensures that the session is saved on every request?
+A. cookie.secure
+B. resave
+C. saveUninitialized
+D. store
+✅ Answer: B
+
+
+
+
+
+
+17. What is the main purpose of a session ID?
+A. To identify the server process
+B. To identify a user’s session uniquely
+C. To encrypt cookies
+D. To generate logs
+✅ Answer: B
+
+
+
+
+
+
+18. Which of these is an example of hybrid state management?
+A. Cookies + Server Session
+B. LocalStorage only
+C. Query String only
+D. Database caching only
+✅ Answer: A
+
+
+
+
+
+19. When using cookie.secure = true in express-session, the cookie is sent only over:
+A. HTTP
+B. WebSockets
+C. HTTPS
+D. FTP
+✅ Answer: C
+
+
+
+
+
+
+
+
+20. Which method helps scale session management across multiple servers?
+A. Storing sessions in RAM
+B. Using Redis/MongoDB as session store
+C. Storing sessions in LocalStorage
+D. Encoding sessions in URLs
+✅ Answer: B
+
+
+
+

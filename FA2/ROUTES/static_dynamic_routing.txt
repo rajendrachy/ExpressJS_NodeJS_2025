@@ -1,0 +1,38 @@
+📌 Static Routing
+Routes are fixed / predefined.
+The path is exact and does not change.
+
+Example:
+app.get('/about', (req, res) => {
+  res.send('About Page');
+});
+
+👉 /about will always return the same response.
+
+
+
+
+
+
+
+
+📌 Dynamic Routing
+Routes use parameters (placeholders) that change at runtime.
+Useful for user profiles, product pages, etc.
+
+Example:
+app.get('/user/:id', (req, res) => {
+  res.send(`User ID: ${req.params.id}`);
+});
+
+
+👉 /user/101 → User ID: 101
+👉 /user/202 → User ID: 202
+
+
+
+✅ In short:
+Static routes → fixed paths.
+Dynamic routes → flexible, use parameters for variable data.
+
+
