@@ -70,6 +70,10 @@ So ./data/file.txt means:
 
 
 
+
+
+
+
 ----------------Absolute Path---------------------
 An absolute path gives the full address to a file or folder, starting from the root of the file system (on Unix-like systems) or drive letter (on Windows).
 

@@ -1,4 +1,9 @@
-//-----------read two files and the combine them in one file and write that two files under that combine file-----------
+//-----------Read two files and the combine them in one file and write that two files under that combine file-----------
+
+
+
+
+// -------------using WriteFile--------------------
 
 // const fs = require('fs');
 
@@ -25,7 +30,10 @@
 
 
 
-//----------------appendFile()-----------------------
+
+
+
+//----------------using appendFile()-----------------------
 // const fs = require('fs');
 // fs.readFile('file1.txt', 'utf-8', (err1, data1) => {
 //   if(!err1) {
@@ -52,3 +60,34 @@
 
 
 
+
+
+
+
+
+
+
+
+const fs = require('fs');
+
+
+fs.readFile('./file1.txt', 'utf-8', (err1, data1) => {
+     if(!err1) {
+      console.log(data1);
+     }
+
+     fs.readFile('./file2.txt', 'utf-8', (err2, data2) => {
+         if(!err2) {
+           console.log(data2);
+         }
+
+
+         const combine = `${data1}\n ${data2}`;
+
+         fs.appendFile('./combine.txt', combine, (err) => {
+           if(!err) {
+                console.log("Success");
+           }
+         })
+     })
+})
