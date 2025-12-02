@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js"></script>
+
+</head>
+<body>
+  
+  <p>Hello World</p>
+
+
+  <script>
+    const socket  = io();
+
+
+socket.on('connect_failed', () => {
+  alert("Sorry, your connection failed");
+})
+
+
+socket.on('reconnecting', () => {
+  alert("Sorry, your re-connection failed");
+})
+
+
+//------- Other event line ------
+// 1. error
+// 2. reconnect_failed
+
+
+
+  </script>
+</body>
+</html>
+
+
+
+<!-- error handling is is in the client side -->
+
+
+
+
+
+
+
+
+
+
+

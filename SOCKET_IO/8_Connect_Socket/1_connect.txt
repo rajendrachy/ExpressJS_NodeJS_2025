@@ -1,0 +1,23 @@
+
+
+
+
+
+
+
+
+
+# Connect client Socket :-> https://youtu.be/S7Dt_JE9gmc?si=qs7iUustVpWr7cJj => yt_link
+
+
+
+
+
+// remaining
+
+// this is last lacture in socket.io
+
+
+
+
+
