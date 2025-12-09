@@ -1,6 +1,9 @@
 // const http = require('http')
 // const fs = require('fs')
-// const querystring = require('querystring') // -> is used in Node.js to import the querystring module, which helps parse and stringify URL query strings
+// const querystring = require('querystring') // -> is used in Node.js to import the querystring module, which helps parse form data and stringify URL query strings
+
+
+
 
 
 
@@ -12,8 +15,7 @@
 //                 res.writeHead(200, {'content-type': 'text/html'})
 //                 res.write(data)
 //                 res.end()
-
-               
+ 
 //             }
 //         })
 //     }else if(req.url == "/login" && req.method == "POST"){
@@ -25,6 +27,7 @@
 //             body += chunk.toString() // .toString() converts the binary Buffer into a readable string.
 
 //         })
+
 //         req.on('end', ()=> {
 //             console.log(querystring.parse(body));
 //         })
@@ -33,11 +36,11 @@
 
 
 
-
-
 // server.listen(3000, ()=>{
 //     console.log('server started...');
 // })
+
+
 
 
 
@@ -92,6 +95,10 @@
 // server.listen(3001, () => {
 //     console.log('Server started on http://localhost:3001');
 // });
+
+
+
+
 
 
 
