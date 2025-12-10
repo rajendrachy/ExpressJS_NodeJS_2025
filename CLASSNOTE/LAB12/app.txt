@@ -19,7 +19,7 @@ extended: true → Uses the qs library (a more powerful library)
 
 ------------------What’s the difference?-----------------------
 Option	                   Library Used	                    Can Parse Nested Objects?	                  Example
-false                    	querystring	                          ❌ No	                     { user: '[object Object]' }
+false                    	querystring	                         ❌ No	                     { user: '[object Object]' }
 true	                       qs	                               ✔️ Yes	                       { user: { name: 'Alice' } }
 
 

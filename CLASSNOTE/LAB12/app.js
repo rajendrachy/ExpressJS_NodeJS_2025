@@ -4,6 +4,8 @@
 
 // const baseRoute = require("./routes/basicRoute");
 
+
+
 // // Middleware to parse form data (optional, good for POST handling)
 // app.use(express.urlencoded({ extended: true }));
 
@@ -15,6 +17,29 @@
 //   console.log("Server started on http://localhost:3000");
 // });
 
+
+
+
+
+
+
+
+
+
+
+//--------Practicing------------------
+// const express = require('express');
+// const fs = require('fs');
+// const path = require('path');
+// const basicRoute = require("./routes/basicRoute");
+
+// const app = express();
+
+// app.use('/index', basicRoute);
+
+// app.listen(3000, () => {
+//   console.log("Server started");
+// })
 
 
 
