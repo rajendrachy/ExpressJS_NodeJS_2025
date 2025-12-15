@@ -11,6 +11,7 @@ const app = express();
 app.use(express.urlencoded({extended: true}))
 
 
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
        cb(null, path.join(__dirname, 'uploads', 'resumes'))
@@ -44,6 +45,7 @@ const upload = multer({
 })
 
 
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 })
@@ -53,10 +55,11 @@ app.post('/upload', upload.single('test-upload'), (req, res) => {
     
     let arr = [];
 
-    fs.readFile('.data.json', 'utf-8', (err, data) => {
+    fs.readFile('./data.json', 'utf-8', (err, data) => {
       if(!err && data.length !== 0) {
         arr = JSON.parse(data);
       }
+
 
 
       const entry = {
@@ -68,6 +71,7 @@ app.post('/upload', upload.single('test-upload'), (req, res) => {
 
       arr.push(entry);
 
+      
 
       fs.writeFile("./data.json", JSON.stringify(arr, null, 2), (err) => {
         if(!err) {

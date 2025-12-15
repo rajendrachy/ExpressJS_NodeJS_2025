@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
 })
 
 
+
 const filterFile = (req, file, cb) => {
   if(file.mimetype.endsWith('/jpg') || file.mimetype.endsWith('/png') || file.mimetype.endsWith('jpeg')) {
     cb(null, true);
@@ -50,6 +51,8 @@ app.post('/upload', upload.array('test-upload', 5), (req, res) => {
 
 
 
+
+
 app.use((err, req, res, next) => {
    if(err instanceof multer.MulterError) {
     return res.status(400).send("You can upload max 5 file only");
@@ -59,6 +62,7 @@ app.use((err, req, res, next) => {
 
    next();
 })
+
 
 
 

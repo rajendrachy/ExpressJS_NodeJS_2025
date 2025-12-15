@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>File Upload</title>
+</head>
+<body>
+  <h2>Upload Files for User 101</h2>
+
+  <form action="/upload/101" method="post" enctype="multipart/form-data">
+    <label>Profile Picture:</label>
+    <input type="file" name="profilePic"><br><br>
+
+    <label>Documents:</label>
+    <input type="file" name="docs" multiple><br><br>
+
+    <label>Others:</label>
+    <input type="file" name="others" multiple><br><br>
+
+    <button>Upload</button>
+  </form>
+</body>
+</html>
+
+
+
+
