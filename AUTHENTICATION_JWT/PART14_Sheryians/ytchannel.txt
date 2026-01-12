@@ -1,4 +1,8 @@
-https://youtu.be/19RpMEonSu8?si=2fMO5X7D-9eocTUS
+# JWT: -> https://youtu.be/19RpMEonSu8?si=2fMO5X7D-9eocTUS => yt_link
+
+
+
+
 
 
 -------------------- Authentication vs Authorization--------------------
@@ -35,6 +39,10 @@ Access policies defined by the app or API
 
 
 
+
+
+
+
 ------------------ Example Scenario:-------------------
 A user logs into a website with their username and password — this is authentication.
 Once logged in, the system checks whether that user has permission to access the admin dashboard — this is authorization.
@@ -54,9 +62,15 @@ Authorization is like being told which rooms you're allowed to enter inside the 
 
 
 
+
+
 -------------------- Relationship:--------------------
 Authentication always comes before authorization.
 You cannot be authorized if you haven't been authenticated.
+
+
+
+
 
 
 

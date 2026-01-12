@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment3</title>
+</head>
+<body>
+  <h1>Student Details</h1>
+  
+  <table border="1">
+        
+          <tr>
+            <th>Name</th>
+            <th>Math</th>
+            <th>Science</th>
+            <th>English</th>
+          </tr>
+
+
+          <% students.forEach(val => { %>
+      <tr>
+        <td><%= val.name %></td>
+        <td><%= val.marks.math %></td>
+        <td><%= val.marks.science %></td>
+        <td><%= val.marks.english %></td>
+      </tr>
+    <% }) %>
+
+        
+  </table>
+
+
+</body>
+</html>
+
+
+

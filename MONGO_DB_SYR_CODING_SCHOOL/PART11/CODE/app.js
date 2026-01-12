@@ -17,6 +17,8 @@ res.send("home")
 
 
 
+
+//-------------Create-------------
 app.get("/create", async (req, res) => {
    let createdUser = await userModel.create({
       name: "rc",
@@ -29,6 +31,10 @@ app.get("/create", async (req, res) => {
 })
 
 
+
+
+
+// -----------Update-----------------
 app.get("/update", async (req, res) => {
    let updatedUser = await userModel.findOneAndUpdate({username: "rcuser"}, {name: "rc chaudhary"}, {new: true});
 
@@ -37,6 +43,9 @@ app.get("/update", async (req, res) => {
 })
 
 
+
+
+// ----------Read-----------------
 app.get("/read", async (req, res) => {
    let users = await userModel.find();
 
@@ -48,16 +57,16 @@ app.get("/read", async (req, res) => {
 
 // find gives an array then findOne gives an Object
 app.get("/readOne", async (req, res) => {
-   let users = await userModel.find({username: "rc"});
+   let users = await userModel.findOne({username: "rc"});
 
    res.send(users);
 })
 
 
 
-
+// ---------Delete---------------
 app.get("/delete", async (req, res) => {
-  let deletedUser = await userModel.findOneAndUpdate({username: "rcuser"});
+  let deletedUser = await userModel.findOneAndDelete({username: "rcuser"});
 
   res.send(deletedUser);
 
@@ -69,6 +78,10 @@ app.get("/delete", async (req, res) => {
 app.listen(3000, () => {
   console.log("Server started");
 })
+
+
+
+
 
 
 

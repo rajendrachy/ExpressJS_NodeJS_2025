@@ -9,13 +9,17 @@ const { secureHeapUsed } = require('crypto');
 const app = express();
 
 
+
+
 //middleware
 app.use(bodyParser.urlencoded({extended: true}));
+
 app.use(session({
   secret: "secret-key",
   resave: false,
   saveUninitialized: true,
 }));
+
 
 
 //load user from json
@@ -31,9 +35,13 @@ app.get('/', (req, res) => {
 })
 
 
+
+
+
 app.post('/login', (req, res) => {
   const {username, password} = req.body;
   console.log(req.body);
+
 
 
     const user = users.find(u => u.username == username && u.password == password);
@@ -67,7 +75,8 @@ app.post('/login', (req, res) => {
 
 
 
-    //protect user page
+
+    //Protect user page
     app.get('/user', (req, res) => {
   if (req.session.role === "user" || req.session.role === "admin") {
     res.sendFile(path.join(__dirname, 'views', 'user.html'));
@@ -85,6 +94,11 @@ app.get('/logout', (req, res) => {
 
 
 
+
 app.listen(3000, () => {
   console.log("Server started");
 })
+
+
+
+

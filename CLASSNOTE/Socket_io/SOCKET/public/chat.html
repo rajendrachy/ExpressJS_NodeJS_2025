@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat</title>
+</head>
+<body>
+  <input type="text" name="message" placeholder="enter message">
+  <button>send</button>
+  <div id="messageContainer"></div>
+
+  <div>
+    <h3>Online Users</h3>
+    <ul id="onlineUsers"></ul>
+  </div>
+
+
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io()
+    const inp = document.querySelector("input")
+    const btn = document.querySelector("button")
+    const msgCont = document.getElementById("messageContainer")
+    const onlineList = document.getElementById("onlineUsers")
+
+
+
+    // Send username to server
+    const userName = localStorage.getItem("name");
+    socket.emit("newUser", userName)
+
+
+
+    socket.on("getAllMessages", (data) => {
+      msgCont.innerText = ""
+      data.forEach(msg => {
+        let div = document.createElement("div")
+        let name = document.createElement("h2")
+        name.innerText = msg.userName
+        div.appendChild(name)
+
+        let message = document.createElement("p")
+        message.innerText = msg.message
+        div.appendChild(message)
+
+        msgCont.appendChild(div)
+      })
+    })
+
+
+
+    socket.on("onlineUsers", (users) => {
+      onlineList.innerHTML = ""
+      users.forEach(user => {
+        const li = document.createElement("li")
+        li.innerText = user
+        onlineList.appendChild(li)
+      })
+    })
+
+    socket.on("notify", (data) => {
+      alert(data)
+    })
+
+    btn.addEventListener("click", () => {
+      socket.emit("sendMessage", {
+        userName,
+        message: inp.value
+      })
+      inp.value = ""
+    })
+  </script>
+</body>
+</html>
+
+
+
+
+

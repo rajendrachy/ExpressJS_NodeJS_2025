@@ -34,10 +34,10 @@ function logActivity() {
      
   });
 }
-
-
 logActivity();
 setInterval(logActivity, 12000); 
+
+
 
 
 

@@ -1,4 +1,0 @@
-----------Create a user account----------
-setup mongoose, scheme, model, userCreate,
-password set , hash, jwt token , cookies
-

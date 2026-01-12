@@ -21,6 +21,7 @@ app.post('/upload', upload.single('avatar'), (req, res) => {
 });
 
 
+
 ----------Form field:---------------
 <input type="file" name="avatar">
 
@@ -119,6 +120,12 @@ app.post('/upload', upload.any(), (req, res) => {
     console.log(req.files);  // Array of files from all fields
     res.send('Any files uploaded!');
 });
+
+
+
+
+
+
 
 
 

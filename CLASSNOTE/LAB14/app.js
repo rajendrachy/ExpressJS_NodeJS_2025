@@ -19,22 +19,5 @@
 
 
 
-const express = require("express");
-const fs = require('fs');
-
-const greeting = require("./routes/greet")
-
-const app = express();
-
-app.use('/', greeting);
-
-
-app.listen(3000, () => {
-  console.log("Server Started");
-})
-
-
-
-
 
 

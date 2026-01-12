@@ -1,2 +1,4 @@
 This is pending -> and another => made two folder inside a uploads folder then push image accouding to this path => in selected path
 
+
+

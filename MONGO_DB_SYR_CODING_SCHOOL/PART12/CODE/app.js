@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
 })
 
 
+
 app.get("/read", async (req, res) => {
   let allUsers = await userModel.find();
   res.send(allUsers);

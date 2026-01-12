@@ -24,9 +24,6 @@ const storage = multer.diskStorage({
   },
 })
 
-  
-
-
 
 
 const filterFile = (req, file, cb) => {
@@ -89,3 +86,11 @@ app.post('/upload', upload.single('test-upload'), (req, res) => {
 app.listen(3000, () => {
   console.log("Server started");
 })
+
+
+
+
+
+
+
+

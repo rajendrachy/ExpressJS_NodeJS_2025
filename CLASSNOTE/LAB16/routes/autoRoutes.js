@@ -17,6 +17,8 @@ router.get('/login', (req, res) => {
      res.sendFile(path.join(__dirname, '../view', 'login.html'));
 })
 
+
+
 router.post('/signup', (req, res) => {
  console.log(req.body); // Should now log form data correctly
   res.send('Signup data received!');
@@ -24,7 +26,12 @@ router.post('/signup', (req, res) => {
 
 
 
+
 module.exports = router;
+
+
+
+
 
 
 

@@ -10,7 +10,6 @@
 
 
 
-
 //------------Using a path-----------------
 // const fs = require('fs');
 // const path = require('path');
@@ -21,10 +20,12 @@
 // const destFile = path.join(destDir, 'report.pdf');
 
 
+
 // if(!fs.existsSync(sourceFile) ) {
 //   console.log("File not found");
 //   process.exit(1);
 // }
+
 
 // if(!fs.existsSync(destDir)) {
 //   fs.mkdirSync(destDir, {recursive:true});
@@ -35,6 +36,7 @@
 //     console.log(`File copied successfully to ${destDir}${sourceFile}`);
 //   }
 // })
+
 
 
 

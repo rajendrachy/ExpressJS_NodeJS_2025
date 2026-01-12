@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 function verifyToken(req, res, next) {
   const token = req.cookies.demoTok;
 
+  
   if (!token) {
     res.send("Access denied. No token.");
   } else {
@@ -35,6 +36,8 @@ app.get('/protected', verifyToken, (req, res) => {
 app.listen(3000, () => {
   console.log("Server started on http://localhost:3000");
 });
+
+
 
 
 

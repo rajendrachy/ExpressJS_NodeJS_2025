@@ -7,7 +7,6 @@
 
 
 
-
 // const server = http.createServer((req, res)=>{
 //     if(req.url == "/login" && req.method == "GET"){
 //         fs.readFile('./login.html', (err, data)=>{

@@ -25,6 +25,8 @@ So you use JSON.parse() to convert the string into a real JavaScript array:
 
 
 
+
+
 --------------------- Why JSON.stringify(arr)?----------------------
 When writing to the file:
 
@@ -45,4 +47,5 @@ So you use JSON.stringify() to convert it to a JSON string:
 Operation	Why it's needed
 JSON.parse(data)	Convert file string → JS object/array
 JSON.stringify()	Convert JS object/array → file string (JSON)
+
 

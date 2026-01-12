@@ -1,7 +1,0 @@
-//* fs.writeFileSync(): Writes data to a file. if the file does not exists, it will be create. if the file exists, it overwrites the content.
-
-//! syntax: fs.writeFileSync(filePath, data, options);
-//? filePath: The file path to write to
-//? data: The content to write on the file
-//? options: OPtional. Inclludes ecoding ('utf8'), mode, or flags
-

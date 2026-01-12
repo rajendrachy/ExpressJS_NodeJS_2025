@@ -15,15 +15,30 @@
 
 
 
-const express = require('express');
-const app = express();
 
-const proRouter = require('./routes/products');
+//-----------Practicing--------------------
 
-app.use('/products', proRouter);
+// const express = require('express');
+// const app = express();
+
+// const proRouter = require('./routes/products');
+
+// app.use('/products', proRouter);
 
 
-app.listen(3000, () => {
-    console.log("Server started");
-})
+// app.listen(3000, () => {
+//     console.log("Server started");
+// })
+
+
+
+
+
+
+
+
+
+
+
+
 

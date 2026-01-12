@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+   <style>
+    .green { color: green; }
+    .blue { color: blue; }
+    .red { color: red; }
+  </style>
+
+</head>
+<body>
+  
+    Name: <p><%= studentData.student.name %></p>
+    Email: <p><%= studentData.student.email %></p>
+
+    <hr>
+
+    <% if(studentData.student.role === "admin") { %>
+       <p>Admin Access</p>
+    <% } %>
+
+
+    <h2>Course List</h2>
+  <ul>
+    <% studentData.courses.forEach(course => { %>
+      <% 
+        let gradeClass = "red"; 
+        if (course.grade === "A") gradeClass = "green";
+        else if (course.grade === "B" || course.grade === "C") gradeClass = "blue";
+      %>
+      <li>
+        <strong><%= course.title %></strong> - 
+        <span class="<%= gradeClass %>"><%= course.grade %></span>
+      </li>
+    <% }) %>
+  </ul>
+
+
+
+
+  <%- include('footer') %>
+
+
+  <h4>Notice</h4>
+
+<p>Escaped (plain text): <%= studentData.notice %></p>
+
+<p>Non-Escaped (renders HTML): <%- studentData.notice %></p>
+
+    
+</body>
+</html>
+
+
+
+
+

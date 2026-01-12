@@ -4,13 +4,9 @@
 
 // Requirements:
 // Use the fs module to write to a file.
-
 // The file name must be: activity.log.
-
 // Every 2 minutes:
-
 // Get the current system time.
-
 // Format it in a readable form (example: 2025-06-30 14:02:00).
 
 // Append this timestamp to the file activity.log with a message like:
@@ -54,6 +50,8 @@
 
 
 
+
+
 // const fs = require('fs');
 
 // function logActivity() {
@@ -68,6 +66,8 @@
 //       }
 //     })
 // }
+
+
 
 
 // logActivity();

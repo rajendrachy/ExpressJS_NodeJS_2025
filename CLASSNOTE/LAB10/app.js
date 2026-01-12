@@ -25,6 +25,7 @@
 
 
 
+
 // // POST route to handle login submission
 // app.post('/login', (req, res) => {
 //     let arr = [];
@@ -52,6 +53,7 @@
 
 
 
+
 // // Start server
 // app.listen(PORT, () => {
 //     console.log(`Server running at http://localhost:${PORT}`);
@@ -65,52 +67,77 @@
 
 
 
+
+
+
+
+
+
 //-----------Practicing--------------------------
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
+// const express = require('express');
+// const path = require('path');
+// const fs = require('fs');
 
-const app = express();
+// const app = express();
 
 
-app.use(express.urlencoded());
-
-app.get('/', (req, res) => {
-    res.send("This is homePage");
-})
-
-app.get('/log', (req, res) => {
-    res.sendFile(path.join(__dirname, 'login.html'));
-})
+// app.use(express.urlencoded());
 
 
 
-app.post('/login', (req, res) => {
- let arr = [];
+// app.get('/', (req, res) => {
+//     res.send("This is homePage");
+// })
 
- fs.readFile('./data.json', 'utf-8', (err, data) => {
-          if(!err && data.length != 0) {
-            console.log(data);
 
-            arr = JSON.parse(data);
-            console.log(arr);
-          }
-          arr.push(req.body);
+
+// app.get('/log', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'login.html'));
+// })
+
+
+
+
+
+// app.post('/login', (req, res) => {
+//  let arr = [];
+
+// fs.readFile('./data.json', 'utf-8', (err, data) => {
+//           if(!err && data.length != 0) {
+//             console.log(data);
+//             arr = JSON.parse(data);
+//             console.log(arr);
+//           }
+
+//         arr.push(req.body);
+
        
-          console.log("The req.body is", req.body);
-
-            fs.writeFile('./data.json', JSON.stringify(arr), (err) => {
-         console.log("save success");
-            } )
-
-          
- })
-})
+//    console.log("The req.body is", req.body);
 
 
 
-app.listen(3000, () => {
-    console.log(`Server stsrted : http://localhost:3000`);
-})
+//     fs.writeFile('./data.json', JSON.stringify(arr), (err) => {
+//       console.log("save success");
+//     })
+
+//  })
+// })
+
+
+
+// app.listen(3000, () => {
+//     console.log(`Server started : http://localhost:3000`);
+// })
+
+
+
+
+
+
+
+
+
+
+
 
 

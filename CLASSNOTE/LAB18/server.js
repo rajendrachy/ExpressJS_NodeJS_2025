@@ -31,7 +31,7 @@
 
 
 
-
+//--------------single file upload---------------
 const express = require('express');
 const multer = require('multer');
 
@@ -55,6 +55,7 @@ app.post("/upload", upload.single('test-upload') ,(req, res)=> {
 app.listen(3000, () => {
     console.log("Server started");
 })
+
 
 
 

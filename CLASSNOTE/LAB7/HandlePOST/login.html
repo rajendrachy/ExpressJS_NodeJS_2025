@@ -1,22 +1,85 @@
-<!DOCTYPE html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Handle POST request</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handle POST request with Fetch</title>
 </head>
 <body>
-  
-  <h3>Login</h3>
+    <h3>Login</h3>
+
+    <input type="text" id="username" name="username" placeholder="Enter Username">
+    <button id="submitBtn">Submit</button>
+
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', () => {
+            const username = document.getElementById('username').value.trim();
+
+            if (!username) {
+                document.getElementById('result').textContent = "Please enter a username";
+                return;
+            }
 
 
-<form action="\login" method="POST">
-  <label for="username">Enter UserName: </label>
-  <input type="text" name="username" id="username" placeholder="Enter Username">
+            fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('result').textContent = data.message;
+            })
+          
+        });
 
-  <button>Submit</button>
-</form>
+
+    </script>
 </body>
-</html>
+</html> -->
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Handle POST request</title>
+ </head>
+ <body>
+  
+   <h3>Login</h3>
+
+  <form action="\login" method="POST">
+   <label for="username">Enter UserName: </label>
+   <input type="text" name="username" id="username" placeholder="Enter Username">
+
+   <button>Submit</button>
+
+
+ </form>
+
+ </body>
+ </html>
+
+
+
+ 

@@ -27,8 +27,6 @@
 
 
 
-
-
 // const fileFilter = (req, file, cb) => {
 //         if(file.mimetype.startsWith('image/')) {
 //          cb(null, true); // true means image file upload allowed
@@ -47,6 +45,8 @@
 
 
 // })
+
+
 
 
 
@@ -94,6 +94,11 @@
 
 
 // // Multiple file using upload.fields[{}]
+
+
+
+
+
 
 
 

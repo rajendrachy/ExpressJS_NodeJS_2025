@@ -3,6 +3,9 @@ const path = require('path');
 const fs = require('fs');
 const app = express();
 
+
+// JSON.stringify(value, replacer, space)
+
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));

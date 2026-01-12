@@ -7,3 +7,11 @@ set PORT=3001 && node --watch app.js // this command should be run in the comman
 
 
 // dont need to run this in the command there is simplest version
+
+
+
+
+
+
+
+

@@ -8,7 +8,7 @@ const session = require('express-session');
 //---------session middleware----------
 app.use(session({
   secret: 'secretpassword',
-  
+
   resave:false, // false -> for not modified, whether the modification available or not 
 
   saveinitialized:false, // false -> not creating the session until the user has save any information in the session
@@ -30,11 +30,24 @@ app.get("/", (req, res) => {
 
 
 
+
+
+
+
+
+
 //--------creating session--------------
 app.get('/set-username', (req, res) => {
   req.session.username = "rc"; // username-> variable we can choose any 
   res.send('user name has been set in session');
+  // console.log(req.session);
 })
+
+
+
+
+
+
 
 
 

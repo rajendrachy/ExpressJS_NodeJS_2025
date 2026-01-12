@@ -24,6 +24,7 @@ app.get("/read", (req, res) => {
 
 
 
+
 app.listen(3000, () => {
   console.log("Server start");
 
@@ -38,8 +39,17 @@ app.listen(3000, () => {
 
 
 
+
+
+
+
 //---------------------bcrypt----------------
 // https://www.npmjs.com/package/bcrypt
+
+
+// encrypt => password -> qbttxpse (1 letter ahead)
+// bcrypt => password => dknfdjfbdjvnfdnvfvnfbvfbj
+
 
 // const express = require('express');
 // const app = express();
@@ -54,6 +64,7 @@ app.listen(3000, () => {
 //     });
 // });
 // })
+
 
 
 // app.get("/", (req, res) => {
@@ -93,14 +104,20 @@ app.listen(3000, () => {
 
 
 
+
+
 //---------------JWT--------------------
 // const express = require('express');
 // const app = express();
 // const bcrypt = require('bcrypt');
-// const jwt = require('jwt');
+// const jwt = require('jsonwebtoken');
 // const cookieParser = require('cookie-parser');
 
 // app.use(cookieParser());
+
+
+
+
 
 
 // app.get("/", (req, res) => {
@@ -112,10 +129,12 @@ app.listen(3000, () => {
 
 
 
+
 // app.get("/read", (req, res) => {
-// // console.log(req.cookies.token);
+//  console.log(req.cookies.token);
 
 // let data = jwt.verify(req.cookies.token, "secret");
+// console.log(data);
 // })
 
 

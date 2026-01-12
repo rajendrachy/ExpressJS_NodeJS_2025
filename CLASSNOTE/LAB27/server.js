@@ -1,9 +1,13 @@
+//-----------ejs(embedded javaScript) start-----------------
+
+
 const express = require('express')
 const ejs = require('ejs')
 
 const app = express()
 
 app.set("view engine", "ejs")
+
 app.set("views", __dirname + "/views")
 
 let list = ["1", "2", "3"]
@@ -16,6 +20,7 @@ app.get("/", (req, res)=>{
             listItem : list,
             var1: true,
         })
+
 
 
 
@@ -38,6 +43,10 @@ app.get("/data", (req, res)=>{
 app.listen(3000, ()=>{
     console.log('server started..')
 })
+
+
+
+
 
 
 

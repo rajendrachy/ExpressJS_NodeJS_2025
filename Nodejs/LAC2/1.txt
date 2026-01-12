@@ -1,2 +1,0 @@
-api -> application programming interface (node js mostly uses api)
-

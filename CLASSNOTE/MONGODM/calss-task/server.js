@@ -20,6 +20,11 @@ connectMongo()
 
 
 
+
+
+
+
+
 app.get("/", async (req, res)=>{
     try {
         let data = await db.collection("students").find().toArray();
@@ -60,6 +65,7 @@ app.post("/filter", async(req, res)=>{
 
 
 
+
 app.delete("/delete/:id", async (req, res)=>{
     console.log(req.params.id)
     await db.collection("students").deleteOne({_id : new ObjectId(req.params.id)})
@@ -72,6 +78,10 @@ app.delete("/delete/:id", async (req, res)=>{
 app.listen(3000, ()=>{
     console.log('server started..')
 })
+
+
+
+
 
 
 

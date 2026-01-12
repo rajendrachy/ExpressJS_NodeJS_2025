@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/add-student" method="post">
+        <input type="text" name="name" placeholder="Enter name">
+        <input type="text" name="section" placeholder="Enter section">
+        <input type="text" name="marks" placeholder="Enter marks">
+        <button>Add Student</button>
+    </form>
+
+    <form action="/filter" method="post">
+       Greater than : <input type="text" name="minMarks" placeholder="Marks">
+       <button>filter</button>
+    </form>
+
+    <table border="1" cellspacing="0" cellpadding="10">
+        <tr>
+            <th>Name</th>
+            <th>Section</th>
+            <th>Marks</th>
+            <th>Action</th>
+        </tr>
+
+       <% students.forEach(student=>{ %>
+            <tr>
+                <td><%= student.name %></td>
+                <td><%= student.section %></td>
+                <td><%= student.marks %></td>
+                <td><button id="<%= student._id %>" onclick="delStudent(event)">delete</button></td>
+            </tr>
+       <% }) %>
+    </table>
+    <script>
+        function delStudent(event){
+            fetch(`/delete/${event.target.id}`, {
+                method: "DELETE",
+                redirect: "follow"
+            }).then(resp => window.location.href = resp.url)
+        }
+    </script>
+</body>
+</html>

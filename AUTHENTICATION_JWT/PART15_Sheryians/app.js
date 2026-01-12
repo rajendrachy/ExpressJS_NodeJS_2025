@@ -77,7 +77,7 @@ app.post('/create',  (req, res) => {
        res.cookie("tojken", token);
         res.send("Yes you can login");
       }
-      else res.send("No you cant login");
+      else res.send("No you can't login");
 
   });
 
@@ -91,10 +91,14 @@ app.post('/create',  (req, res) => {
     res.redirect('/');
   })
 
+
   
 app.listen(3000, () => {
   console.log("Server start");
 });
+
+
+
 
 
 

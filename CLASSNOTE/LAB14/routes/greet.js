@@ -34,7 +34,8 @@
 // });
 
 
-// //module.exports = router;
+
+// module.exports = router;
 
 
 
@@ -45,37 +46,4 @@
 
 
 
-
-
-
-const express = require('express');
-
-const router = express.Router();
-
-
-
-router.get('/greet', (req, res) => {
-      const lan = req.query.lan;
-
-      console.log("first", lan);
-
-      let msg = "";
-
-      if(lan == 'eng') {
-        msg = "Hello";
-      } else if(lan == 'fr') {
-        msg = "ngjdfjgndf";
-      }
-
-      res.send(msg);
-})
-
-
-
-
-
-
-
-
-module.exports = router;
 

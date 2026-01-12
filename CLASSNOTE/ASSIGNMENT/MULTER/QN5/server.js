@@ -29,6 +29,10 @@ const storage = multer.diskStorage({
   },
 });
 
+
+
+
+
 // File validation
 const fileFilter = (req, file, cb) => {
   const allowed = ['.jpg', '.jpeg', '.png', '.pdf', '.docx'];
@@ -37,6 +41,9 @@ const fileFilter = (req, file, cb) => {
   else cb(new Error('Invalid file type'), false);
 };
 
+
+
+
 // Multer instance
 const upload = multer({
   storage,
@@ -44,12 +51,17 @@ const upload = multer({
   limits: { fileSize: 2 * 1024 * 1024 }, // 2MB limit
 });
 
+
 // ---------------- Routes ----------------
+
+
 
 // Home page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+
 
 // Upload files
 app.post(
@@ -66,6 +78,8 @@ app.post(
     });
   }
 );
+
+
 
 // Get user files
 app.get('/files/:userId', (req, res) => {
@@ -107,6 +121,10 @@ app.use((err, req, res, next) => {
 
 // Start server
 app.listen(3000, () => console.log('Server started on port 3000'));
+
+
+
+
 
 
 

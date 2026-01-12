@@ -7,6 +7,7 @@
 // // const products = JSON.parse(fs.readFileSync('products.json', 'utf-8'));
 
 
+
 // // GET /products/category/:categoryName
 // router.get('/category/:categoryName', (req, res) => {
 //     const category = req.params.categoryName.toLowerCase();
@@ -21,6 +22,7 @@
 // });
 
 
+
 // module.exports = router;
 
 
@@ -31,32 +33,47 @@
 
 
 
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const product = require('../products.json');
-
-const router = express.Router();
 
 
-router.get('/category/:categoryName', (req, res) => {
-   const cName = req.params.categoryName;
+//---------Practicing--------------------
+// const express = require('express');
+// const path = require('path');
+// const fs = require('fs');
+// const product = require('../products.json');
 
-   res.sendFile(path.join(__dirname, '../products.json'));
-
-
-    console.log(product);
-
-  product.filter((val) => {
-    if(val.category == cName) {
-       // console.log(val.name);
-       console.log(val.name + "-" + val.id);
-        //res.send(val.name + " " + val.id);
-    }
-  })
-})
+// const router = express.Router();
 
 
+// router.get('/category/:categoryName', (req, res) => {
+//    const cName = req.params.categoryName;
 
-module.exports = router;
+//    res.sendFile(path.join(__dirname, '../products.json'));
+
+
+//     console.log(product);
+
+//   product.filter((val) => {
+//     if(val.category == cName) {
+//        // console.log(val.name);
+//        console.log(val.name + "-" + val.id);
+//         //res.send(val.name + " " + val.id);
+//     }
+//   })
+// })
+
+
+
+// module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
 

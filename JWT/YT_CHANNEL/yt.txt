@@ -1,0 +1,32 @@
+Yahu_baba
+https://youtu.be/f1iwXq-p10o?si=Gf9-DLaXy-6CzVeA
+
+
+
+----------1. What is JWT?-----------
+JWT = JSON Web Token.
+It’s a compact, secure way to transmit user identity + claims between client and server.
+
+Commonly used in authentication and authorization.
+Self-contained → all info is inside the token.
+
+
+
+
+
+
+
+---------2. Structure of JWT---------
+A JWT has 3 parts, separated by .
+-> header.payload.signature
+
+----------Example:------------
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+eyJ1c2VyIjoiam9obiIsInJvbGUiOiJhZG1pbiJ9.
+h6Wf0uwAvrCz5z...
+
+
+
+
+
+

@@ -14,6 +14,8 @@ app.use((req, res, next) => {
 });
 
 
+
+
 // Route handler
 app.get('/', (req, res) => {
   console.log("Hello");
@@ -25,5 +27,11 @@ app.get('/', (req, res) => {
 app.listen(3000, () => {
   console.log('Server running at http://localhost:3000');
 });
+
+
+
+
+
+
 
 

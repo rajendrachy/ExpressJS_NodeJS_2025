@@ -12,13 +12,18 @@
 
 
 
+
+
+
+
+
 // const fs = require('fs');
 // const path = require('path');
 
 // const folderPath = path.join(__dirname + '/documents');
 
 // console.log("The folder path is" ,folderPath);
-// console.log("The dir nameis" , __dirname) // upto assignment
+//  console.log("The dir nameis" , __dirname) // upto assignment
 // console.log("The file name is", __filename) // upto qn3.js
 
 
@@ -30,13 +35,15 @@
 // }
 
 
+
+
 // fs.readdir(folderPath, (err, data) => {
 //        if(!err) {
 //         console.log(data);
 
 //         data.forEach((item) => {
-//           const itemPath = folderPath + "/" + item;
-//              console.log("The item path is", itemPath);
+//            const itemPath = folderPath + "/" + item;
+//           //    console.log("The item path is", itemPath);
 
 //           if(fs.statSync(itemPath).isFile()) {
 //               console.log(item);
@@ -44,6 +51,10 @@
 //         })
 //        }
 // })
+
+
+
+
 
 
 
@@ -136,6 +147,11 @@
 
 
 
+
+
+
+
+
 // What fs.statSync() Does:
 // fs.statSync(path) is a synchronous method from Node.js's fs module.
 
@@ -161,6 +177,15 @@
 // This means:
 
 // “Check if the item at itemPath is a regular file.”
+
+
+
+
+
+
+
+
+
 
 
 

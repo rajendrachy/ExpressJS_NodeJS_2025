@@ -1,0 +1,53 @@
+----------------Here’s the Express.js request lifecycle in short :------------------------
+Client sends a request → Express receives it as req and res.
+Middleware runs in order → logging, parsing, auth, etc.
+Route matching → Express finds the matching route by path + method.
+Route handler executes → business logic runs (DB calls, processing, etc.).
+Response is sent → via res.send(), res.json(), etc.
+Error/404 handling → if no route matches or error occurs.
+
+------------------So basically:-----------------------
+Request → Middleware → Route → Response → End ✅
+
+
+
+
+
+
+
+
+
+
+---------------blocking vs non-blocking code---------------
+Blocking code → Stops the event loop until it finishes → other requests must wait.
+Non-blocking code → Doesn’t stop the event loop → frees it to handle other requests while waiting for I/O.
+👉 In Express, always prefer non-blocking (async) code for better performance and scalability
+
+
+
+
+
+
+
+
+
+
+
+#----------------The Common HTTP Methods----------------------
+GET → Retrieve data
+POST → Send new data (create)
+PUT → Update/replace an existing resource
+PATCH → Update/modify part of a resource
+DELETE → Remove a resource
+(Less common but still valid) OPTIONS, HEAD
+
+
+
+
+
+
+
+
+
+
+

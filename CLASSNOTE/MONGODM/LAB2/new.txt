@@ -1,1 +1,3 @@
 lab2
+// assignment mongodb qn1
+

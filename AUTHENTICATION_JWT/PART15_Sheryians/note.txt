@@ -1,0 +1,10 @@
+steps 
+1.create user account
+2. setup mongoose
+3. scheme create
+4. model create
+5.jwt token -> cookie set
+
+
+login _> token _>decrypt -> email
+

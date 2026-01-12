@@ -1,3 +1,7 @@
+// # qn1 ---- MongoDB
+
+
+
 const express = require("express");
 const {MongoClient} = require('mongodb');
 
@@ -17,6 +21,10 @@ async function connectDb() {
   }
 }
 connectDb();
+
+
+
+
 
 
 
@@ -55,16 +63,22 @@ app.get("/seed-employees", async (req, res) => {
 })
 
 
+
+
+
 app.get("/view-employee", async (req, res) => {
   let data = await db.collection("employees").find().toArray();
   res.send(data);
 })
 
 
+
+
 app.get("/add-employee/:id/:name/:salary/:deptid",  async (req, res) => {
     
   const {id, name, salary, deptid} = req.params;
 
+  
   const newEmployee = {
     empid: Number(id),
     name : name,
@@ -138,9 +152,7 @@ app.get("/search-employee/:name", async (req, res) => {
 
 
 
-
-
-
+// department
 
 
 app.get("/seed-department", async (req, res) => {
@@ -188,6 +200,8 @@ const depId = Number(req.params.id);
 
 
 
+
+
 app.get("/update-department/:id/:newname", async (req, res) => {
   const depId = Number(req.params.id);
 
@@ -204,4 +218,5 @@ app.listen(3000, () => {
   console.log("Server started");
 
 })
+
 

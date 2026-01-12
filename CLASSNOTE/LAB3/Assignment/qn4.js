@@ -14,45 +14,52 @@
 // 3.	Copy only files that end with .txt
 // 4.	Print a success message for each file copied
 
-const fs = require('fs');
-const path = require('path');
-
-const sourceDir = './myNotes';
-const destDir = './backupNotes';
-
-if(!fs.existsSync(sourceDir)) {
-  console.log("File not found");
-  process.exit(1);
 
 
-}
 
 
-if(!fs.existsSync(destDir)) {
-    fs.mkdirSync(destDir, {recursive : true});
-}
 
-fs.readdir(__dirname + '/myNotes', (err, data) => {
-      if(!err) {
-        console.log(data);
-        data.forEach((val)=> {
-          const itemPath = __dirname + '/myNotes' + '/' + val;
 
-            if(fs.statSync(itemPath).isFile() && val.endsWith('.txt')) {
-                const destPath = __dirname + '/backupNotes' + '/' + val;
+
+
+// const fs = require('fs');
+// const path = require('path');
+
+// const sourceDir = './myNotes';
+// const destDir = './backupNotes';
+
+// if(!fs.existsSync(sourceDir)) {
+//   console.log("File not found");
+//   process.exit(1);
+
+
+// }
+
+
+// if(!fs.existsSync(destDir)) {
+//     fs.mkdirSync(destDir, {recursive : true});
+// }
+
+// fs.readdir(__dirname + '/myNotes', (err, data) => {
+//       if(!err) {
+//         console.log(data);
+//         data.forEach((val)=> {
+//           const itemPath = __dirname + '/myNotes' + '/' + val;
+
+//             if(fs.statSync(itemPath).isFile() && val.endsWith('.txt')) {
+//                 const destPath = __dirname + '/backupNotes' + '/' + val;
                 
-                console.log(val);
-               
-                fs.copyFile(itemPath, destPath, (err) => {
-                  if(!err) {
-                    console.log("File .txt copy successful!");
-                  }
-                })
-            }
-        })
-      }
-})
+//                 console.log(val);
 
+//                 fs.copyFile(itemPath, destPath, (err) => {
+//                   if(!err) {
+//                     console.log("File .txt copy successful!");
+//                   }
+//                 })
+//             }
+//         })
+//       }
+// })
 
 
 
@@ -95,6 +102,9 @@ fs.readdir(__dirname + '/myNotes', (err, data) => {
 //     })
 //   }
 // })
+
+
+
 
 
 

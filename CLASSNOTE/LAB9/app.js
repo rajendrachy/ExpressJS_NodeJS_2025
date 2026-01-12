@@ -43,7 +43,8 @@
 
 
 
-//-----------------according to the above question-------------------
+//-----------------According to the above question-------------------
+
 // const http = require('http');
 // const fs = require('fs');
 // const path = require('path');
@@ -78,6 +79,7 @@
 //             res.end(`Result: ${add(a, b)}`);
 //         }
 //     }
+
 
 //     // SUB (GET)
 //     else if (req.url.startsWith('/sub') && req.method === 'GET') {
@@ -183,6 +185,7 @@
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, 'public')));
 
+
 // // Serve index.html
 // app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -197,12 +200,15 @@
 //   res.send(`<h2>${result}</h2><a href="/">Back</a>`);
 // });
 
+
+
 // app.get('/sub', (req, res) => {
 //   const a = parseFloat(req.query.num1);
 //   const b = parseFloat(req.query.num2);
 //   const result = isNaN(a) || isNaN(b) ? 'Error: Invalid input.' : `Result: ${sub(a, b)}`;
 //   res.send(`<h2>${result}</h2><a href="/">Back</a>`);
 // });
+
 
 // // Handle POST routes
 // app.post('/mul', (req, res) => {
@@ -211,6 +217,8 @@
 //   const result = isNaN(a) || isNaN(b) ? 'Error: Invalid input.' : `Result: ${mul(a, b)}`;
 //   res.send(`<h2>${result}</h2><a href="/">Back</a>`);
 // });
+
+
 
 // app.post('/div', (req, res) => {
 //   const a = parseFloat(req.body.num1);
@@ -221,11 +229,11 @@
 //   res.send(`<h2>${result}</h2><a href="/">Back</a>`);
 // });
 
+
 // // Start
 // app.listen(3000, () => {
 //   console.log('Server running at http://localhost:3000');
 // });
-
 
 
 

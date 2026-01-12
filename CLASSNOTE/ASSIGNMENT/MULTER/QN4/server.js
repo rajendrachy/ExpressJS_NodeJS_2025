@@ -11,6 +11,7 @@ app.get('/', (req, res) => {
 
 
 
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
   cb(null, path.join(__dirname, 'uploads', 'products'));
@@ -20,6 +21,7 @@ const storage = multer.diskStorage({
       cb(null,newFile)
   },
 })
+
 
 
 const filterFile = (req, file, cb) => {
@@ -72,5 +74,10 @@ app.use((error, req, res, next) => { // for error handling
 app.listen(3000, () => {
   console.log("Server started");
 })
+
+
+
+
+
 
 

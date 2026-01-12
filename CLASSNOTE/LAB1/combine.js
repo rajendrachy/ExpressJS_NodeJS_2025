@@ -91,3 +91,14 @@ fs.readFile('./file1.txt', 'utf-8', (err1, data1) => {
          })
      })
 })
+
+
+
+
+
+
+
+
+
+
+
